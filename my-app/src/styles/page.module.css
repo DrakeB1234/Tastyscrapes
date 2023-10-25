@@ -1,0 +1,9 @@
+.MainLayout {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+}
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+}
