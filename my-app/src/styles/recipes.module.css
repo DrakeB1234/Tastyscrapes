@@ -1,0 +1,114 @@
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 1em 4em 1em;
+}
+.ParentContainer {
+    display: flex;
+    flex-direction: column;
+    width: clamp(100px, 100%, 1000px);
+    padding: 3em;
+    box-shadow: 0 0.1em 0.4em var(--green-colorgr);
+    border-radius: 20px;
+}
+.TitleContainer {
+    display: flex;
+    padding-bottom: 1em;
+}
+    .TitleContainer > img {
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+    /* Name container */
+    .RecipeNameContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 0 1em 1em 1em;
+        overflow: hidden;
+    }
+        /* Recipe Name */
+        .RecipeNameContainer > h1 {
+            color: var(--green-colorbl);
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            padding-bottom: 0.4em;
+            overflow-wrap: break-word;
+        }
+        /* Recipe Creator */
+        .RecipeNameContainer > h2 {
+            color: var(--green-colorbl);
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            padding-bottom: 0.2em;
+            overflow-wrap: break-word;
+        }
+        /* link */
+        .RecipeNameContainer > a {
+            color: var(--green-colorbl);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            overflow-wrap: break-word;
+        }
+        /* Recipe Edited */
+        .RecipeNameContainer > h3 {
+            margin-top: auto;
+            color: var(--green-colorgr);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            overflow-wrap: break-word;
+        }
+
+.RecipeNutrition {
+    display: flex;
+    gap: 0.5em;
+}
+.RecipeNutritionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 10px;
+    text-align: center;
+    background-color: var(--green-colorgrli);
+    overflow: hidden;
+}
+    /* Titles */
+    .RecipeNutritionItem > h1{
+        color: var(--green-colorbl);
+        font-size: 1rem;
+        font-weight: 700;
+        border-bottom: 1px solid var(--green-colorbl);
+    }
+    /* Text */
+    .RecipeNutritionItem > h2 {
+        color: var(--green-colorbl);
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+/* Phones */
+@media (max-width: 576px) { 
+    /* change the look of recipe on smaller devices */
+    .ParentContainer {
+        padding: 0em;
+        box-shadow: 0 var(--green-colorgr);
+        border-radius: 0;
+    }
+    /* target recipe image size */
+    .TitleContainer > img {
+        width: 100px;
+        height: 100px;
+    }
+    /* Recipe Name */
+    .RecipeNameContainer > h1 {
+        font-size: 1.4rem;
+    }
+}

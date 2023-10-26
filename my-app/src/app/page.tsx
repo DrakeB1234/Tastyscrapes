@@ -37,6 +37,8 @@ export default function Home() {
 
           <input type="submit" />
         </form>
+
+        <p>Currently works with Allrecipes.com, Bonappetit.com, Seriouseats.com</p>
       </div>
     </main>
   )

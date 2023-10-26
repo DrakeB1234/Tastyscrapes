@@ -1,0 +1,47 @@
+.MainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ParentContainer {
+    display: flex;
+    align-items: center;
+    width: clamp(100px, 100%, 1200px);
+    padding: 0.8em;
+    padding-bottom: 1.2em;
+}
+    /* Header Link */
+    .ParentContainer > a {
+        color: var(--green-colorbl);
+        font-size: 1.8rem;
+        font-weight: 900;
+    }
+    .ParentContainer > form {
+        flex: 1;
+    }
+.SearchContainer {
+    display: flex;
+    align-items: center;
+    padding: 0.7em 1em 0.7em 1em;
+    margin-left: 2em;
+    width: clamp(100px, 100%, 400px);
+    border: 2px solid var(--green-colorgr);
+    border-radius: 8px;
+}
+    /* Reset all defaults */
+    .SearchContainer > input, .SearchContainer > button {
+        border: 0;
+        background: none;
+        outline: none;
+    }
+    /* text */
+    .SearchContainer > input {
+        width: 100%;
+        font-size: 1.1rem;
+        color: var(--green-colorbl);
+    }
+    /* btn */
+    .SearchContainer > button {
+        display: flex;
+        padding-left: 1em;
+    }
