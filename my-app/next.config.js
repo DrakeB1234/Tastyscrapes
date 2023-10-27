@@ -11,6 +11,15 @@ const nextConfig = {
           {
             hostname: 'www.seriouseats.com',
           },
+          {
+            hostname: 'www.delish.com',
+          },
+          {
+            hostname: 'hips.hearstapps.com',
+          },
+          {
+            hostname: 'assets.bonappetit.com',
+          },
         ],
       },
 }

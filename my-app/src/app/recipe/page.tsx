@@ -33,7 +33,7 @@ export default async function Recipe({
 
   return (
     <>
-      <Navbar />
+      <Navbar searchBar={true} />
       <main className={styles.MainContainer}>
         <div className={styles.ParentContainer}>
 
@@ -47,35 +47,64 @@ export default async function Recipe({
             <div className={styles.RecipeNameContainer}>
               <h1>{recipeData?.recipeName}</h1>
               <h2>Creator: {recipeData?.recipeCreator}</h2>
-              <Link href={recipeData ? recipeData.originURL : ''}>From: {recipeData?.originHostname}</Link>
+              <Link href={recipeData ? recipeData.originURL : ''} target='_blank'>From: {recipeData?.originHostname}</Link>
               <h3>Edited by Clarified Recipes User</h3>
             </div>
           </div>
 
           <div className={styles.RecipeNutrition}>
+            {recipeData?.prepTime
+            ?
             <div className={styles.RecipeNutritionItem}>
               <h1>Prep Time</h1>
               <h2>{recipeData?.prepTime}</h2>
             </div>
+            : <></>
+            }
+
+            {recipeData?.cookTime
+            ?
             <div className={styles.RecipeNutritionItem}>
               <h1>Cook Time</h1>
               <h2>{recipeData?.cookTime}</h2>
             </div>
+            : <></>
+            }
+
+            {recipeData?.totalTime
+            ?
             <div className={styles.RecipeNutritionItem}>
               <h1>Total Time</h1>
               <h2>{recipeData?.totalTime}</h2>
             </div>
+            : <></>
+            }
+
+            {recipeData?.servings
+            ?
             <div className={styles.RecipeNutritionItem}>
               <h1>Servings</h1>
               <h2>{recipeData?.servings}</h2>
             </div>
+            : <></>
+            }
           </div>
 
-          <h2>Ingredients</h2>
-          {recipeData?.ingredientData?.map((ele: any, idx: number) => <p key={`ingredient-${idx}`}>{ele}</p>)}
+          <div className={styles.IngredientsContainer}>
+            <h1>Ingredients</h1>
+            {recipeData?.ingredientData?.map((ele: any, idx: number) => <h2 key={`ingredient-${idx}`}>{ele}</h2>)}
+          </div>
 
-          <h2>Steps</h2>
-          {recipeData?.stepsData?.map((ele: any, idx: number) => <p key={`step-${idx}`}>{`Step ${idx + 1}: ${ele}`}</p>)}
+          <div className={styles.StepsContainer}>
+            <h1>Steps</h1>
+            {recipeData?.stepsData?.map((ele: any, idx: number) => (
+              <div key={`step-${idx}`} className={styles.StepsItem}>
+                <h1>{`${idx + 1}`}</h1>
+                <h2>{`${ele}`}</h2>
+              </div>
+            ))}
+          </div>
+
         </div>
       </main>
     </>

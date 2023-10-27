@@ -4,6 +4,7 @@ export async function FormatHTML_URL(html: any, url: URL) {
   if (url.hostname == 'www.allrecipes.com') return await Format_AllRecipes(html, url);
   else if (url.hostname == 'www.bonappetit.com') return await Format_Bonappetit(html, url);
   else if (url.hostname == 'www.seriouseats.com') return await Format_Seriouseats(html, url);
+  else if (url.hostname == 'www.delish.com') return await Format_Delish(html, url);
 }
 
 async function Format_AllRecipes(html: any, url:URL) {
@@ -296,6 +297,116 @@ async function Format_Seriouseats(html: any, url:URL) {
       stepsData.push($(e).text().trim());
     })
     // END
+    // Return all data into obj
+    return {
+      'originURL' : originURL, 
+      'originHostname' : new URL(originURL).hostname, 
+      'recipeCreator' : recipeCreator, 
+      'recipeName' : recipeName,
+      'recipeImg' : recipeImg,
+      'prepTime' : prepTime,
+      'cookTime' : cookTime,
+      'totalTime' : totalTime,
+      'servings' : servings,   
+      'ingredientData' : ingredientData,
+      'stepsData' : stepsData,
+    }
+
+  } catch (err) { 
+    console.log(err);
+  }
+}
+
+async function Format_Delish(html: any, url:URL) {
+  let originURL = url.toString();
+  let recipeCreator: string = '';
+  let recipeName: string = '';
+  let recipeImg: string | undefined = '';
+
+  let prepTime: string | undefined = '';
+  let cookTime: string | undefined = '';
+  let totalTime: string | undefined = '';
+  let servings: string | undefined = '';
+
+  let ingredientData: any = [];
+  let stepsData: any = [];
+
+  let tempData = '';
+
+  try {
+      // Load body data
+      const $ = cheerio.load(html);
+
+    // Gets Creator Name from HTML
+    recipeCreator = $(
+      '#main-content > header > div > div > div.css-1ry8nt7.exadjwu7 > address > span > a'
+    ).text().trim();
+    // END
+
+    // Gets Recipe Name from HTML
+    recipeName = $(
+      '#main-content > header > div > div > h1'
+    ).text().trim();
+    // END
+
+    // Gets Recipe Img from HTML
+    recipeImg = $(
+      '#main-content > div.css-k008qs.ewisyje0 > div.recipe-container.content-container.article-container.css-waqzau.ewisyje4 > div.content-lead.no-print.css-trzem2.ewisyje6 > div > div > div > picture > img'
+    ).attr('src');
+    // if img null, then try another img
+    if (!recipeImg) {
+      recipeImg = $(
+        '#main-content > div.css-k008qs.ewisyje0 > div.recipe-container.content-container.article-container.css-waqzau.ewisyje4 > div.recipe-body.css-bhostb.e7k5zd1 > div.article-body-content.article-body.recipe-body-content.no-print.css-1vzhgcw.ewisyje7 > div.align-center.size-medium.embed.css-1736von.e1xqj1sx4 > div > div.css-p7qblm.ewcw41w0 > img'
+      ).attr('src');
+    }
+    // END
+
+    // Gets Ingredients from HTML
+    let temp = ''
+    $(
+      '#main-content > div.css-k008qs.ewisyje0 > div.recipe-container.content-container.article-container.css-waqzau.ewisyje4 > div.recipe-body.css-bhostb.e7k5zd1 > div.css-i2pd41.e7k5zd3 > section > div.ingredients-body.css-0.eno1xhi5 > div.css-1csxh9k.eno1xhi4 > ul:nth-child(n) > li'
+    ).children().each((i: number, e: any) => {
+      // Ingredients sperated by <p>
+      if (e.name == 'p') {
+        temp += $(e).text();
+        ingredientData.push(temp);
+        temp = '';
+      }
+      else {
+        temp += $(e).text();
+      }
+    })
+    // END
+
+    // Get nutririton
+    let itx = 0;
+    $(
+      '#main-content > div.css-k008qs.ewisyje0 > div.recipe-container.content-container.article-container.css-waqzau.ewisyje4 > div.recipe-body.css-bhostb.e7k5zd1 > dl > div:nth-child(n) > dd > span.css-nqfewg.e1909yi82'
+    ).each((i: number, e: any) => {
+
+
+      let text = $(e).text().trim();
+      if (text != '') {
+        if (itx == 0) { servings = text; }
+        else if (itx == 1) { prepTime = text; }
+        else if (itx == 2) { totalTime = text; }
+
+        itx++;
+      }
+    })
+    // END
+
+    // Gets Steps from HTML, has to filter to get only text nodes and avoid all elements
+    $(
+      '#main-content > div.css-k008qs.ewisyje0 > div.recipe-container.content-container.article-container.css-waqzau.ewisyje4 > div.recipe-body.css-bhostb.e7k5zd1 > div.css-i2pd41.e7k5zd3 > div > ul > li > ol > li:nth-child(n)'
+    ).contents()
+    .filter(function () {
+      return this.type === "text";
+    })
+    .each((i: number, e: any) => {
+      stepsData.push($(e).text().trim());
+    })
+
     // Return all data into obj
     return {
       'originURL' : originURL, 

@@ -10,7 +10,11 @@ type Inputs = {
     url: string
 }
 
-export default function Navbar(props: any){
+type Props = {
+    searchBar: boolean,
+}
+
+export default function Navbar(props: Props){
 
 const {
     register,
@@ -30,22 +34,36 @@ const {
   return (
     <div className={styles.MainContainer}>
         <div className={styles.ParentContainer}>
-            <Link href={'/'}>Clarfied Recipes</Link>
+            <Link href={'/'}>                    
+                <Image 
+                width={100}
+                height={70}
+                quality={100}
+                alt='>'
+                src={'/graphics/icons/ClarifiedRecipe.png'}
+                />
+            </Link>
 
+            {props.searchBar
+            ?
             <form onSubmit={handleSubmit(onSubmit)}>
-
-            <div className={styles.SearchContainer}>
-                <input {...register("url", { required: true })} />
-                <button type="submit">
-                    <Image 
-                    width={20}
-                    height={20}
-                    alt='>'
-                    src={'/graphics/icons/icon-right-arrow.svg'}
+                <div className={styles.SearchContainer}>
+                    <input {...register("url", { required: true })} 
+                    placeholder='Paste a URL'
                     />
-                </button>
-            </div>
+                    <button type="submit">
+                        <Image 
+                        width={20}
+                        height={20}
+                        alt='>'
+                        src={'/graphics/icons/icon-right-arrow.svg'}
+                        />
+                    </button>
+                </div>
             </form>
+            : <></>
+            }
+
         </div>
     </div>
   )

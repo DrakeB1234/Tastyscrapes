@@ -7,3 +7,38 @@
     display: flex;
     flex-direction: column;
 }
+.SearchContainer {
+    display: flex;
+    align-items: center;
+    padding-left: 1.4em;
+    margin-left: 2em;
+    width: clamp(100px, 100%, 450px);
+    border: 2px solid var(--grey-colorli);
+    border-radius: 8px;
+}
+    /* Reset all defaults */
+    .SearchContainer > input, .SearchContainer > button {
+        border: 0;
+        background: none;
+        outline: none;
+    }
+    /* text */
+    .SearchContainer > input {
+        width: 100%;
+        font-size: 1.1rem;
+        color: var(--green-colorbl);
+    }
+        /* text placeholder */
+        .SearchContainer > input::placeholder {
+            color: var(--green-colorgr);
+        }
+    /* btn */
+    .SearchContainer > button {
+        display: flex;
+        padding: 1em 1.4em 1em 1em;
+        cursor: pointer;
+    }
+       /* btn */
+       .SearchContainer > button:hover, .SearchContainer > button:active {
+        background-color: var(--grey-colorli);
+    }

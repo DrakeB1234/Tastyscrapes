@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     width: clamp(100px, 100%, 1000px);
-    padding: 3em;
+    padding: 3em 4em 3em 4em;
     box-shadow: 0 0.1em 0.4em var(--green-colorgr);
     border-radius: 20px;
 }
@@ -58,26 +58,29 @@
         /* Recipe Edited */
         .RecipeNameContainer > h3 {
             margin-top: auto;
-            color: var(--green-colorgr);
+            color: var(--green-colorbl);
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: 1px;
             overflow-wrap: break-word;
         }
 
 .RecipeNutrition {
     display: flex;
-    gap: 0.5em;
+    justify-content: center;
+    gap: 2em;
+    margin-bottom: 1em;
+    background-color: var(--green-colorgrli);
 }
 .RecipeNutritionItem {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    padding: 0.5em 1em 0.5em 1em;
-    border-radius: 10px;
-    text-align: center;
+    gap: 0.8em;
+    padding: 1em;
     background-color: var(--green-colorgrli);
+    text-align: center;
     overflow: hidden;
 }
     /* Titles */
@@ -85,12 +88,62 @@
         color: var(--green-colorbl);
         font-size: 1rem;
         font-weight: 700;
-        border-bottom: 1px solid var(--green-colorbl);
     }
     /* Text */
     .RecipeNutritionItem > h2 {
         color: var(--green-colorbl);
         font-size: 1rem;
+        font-weight: 400;
+    }
+.IngredientsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    padding-bottom: 2em;
+    overflow: hidden;
+}
+    /* title */
+    .IngredientsContainer > h1 {
+        color: var(--green-colorbl);
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+    /* items */
+    .IngredientsContainer > h2 {
+        color: var(--green-colorbl);
+        font-size: 1.2rem;
+        font-weight: 400;
+    }
+.StepsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    line-height: 2rem;
+    padding-bottom: 2em;
+    overflow: hidden;
+}
+    /* title */
+    .StepsContainer > h1 {
+        color: var(--green-colorbl);
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+.StepsItem {
+    display: flex;
+}
+    /* steps */
+    .StepsItem > h1 {
+        padding-right: 4%;
+        color: var(--green-color2);
+        font-size: 1.5rem;
+        font-weight: 900;
+    }
+    /* item */
+    .StepsItem > h2 {
+        padding-left: 0.8em;
+        border-left: 1px solid var(--green-color3);
+        color: var(--green-colorbl);
+        font-size: 1.2rem;
         font-weight: 400;
     }
 
@@ -110,5 +163,56 @@
     /* Recipe Name */
     .RecipeNameContainer > h1 {
         font-size: 1.4rem;
+    }
+    /* nutrition */
+    .RecipeNutrition {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 1em;
+        background-color: var(--green-colorgrli);
+    }
+    /* nutrition items */
+    .RecipeNutritionItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 0.5em;
+        background-color: var(--green-colorgrli);
+    }
+    /* ingredients */
+    /* title */
+    .IngredientsContainer > h1 {
+        color: var(--green-colorbl);
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    /* items */
+    .IngredientsContainer > h2 {
+        color: var(--green-colorbl);
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    /* steps */
+    /* title */
+    .StepsContainer > h1 {
+        color: var(--green-colorbl);
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+    /* steps */
+    .StepsItem > h1 {
+        padding-right: 4%;
+        color: var(--green-color2);
+        font-size: 1.2rem;
+        font-weight: 900;
+    }
+    /* item */
+    .StepsItem > h2 {
+        padding-left: 0.8em;
+        border-left: 1px solid var(--green-color3);
+        color: var(--green-colorbl);
+        font-size: 1rem;
+        font-weight: 400;
     }
 }
