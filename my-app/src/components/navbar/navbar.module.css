@@ -54,3 +54,7 @@
        .SearchContainer > button:hover, .SearchContainer > button:active {
         background-color: var(--grey-colorli);
     }
+
+@media (max-width: 576px) { 
+    
+}

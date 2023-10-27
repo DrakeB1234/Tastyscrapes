@@ -1,3 +1,51 @@
+/* Skeleton Loading */
+.SkeletonLoading {
+    border-radius: 10px;
+    padding: 1em;
+    animation: skeleton-loading 0.8s infinite linear alternate;
+}
+.SkeletonLoadingNutrition {
+    padding: 3em;
+    animation: skeleton-loading 0.8s infinite linear alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(209, 209, 209);
+    }
+    100% {
+        background-color: rgb(240, 240, 240);
+    }
+}
+
+.SkeletonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    width: 100%;
+    padding: 0 1em 1em 1em;
+}
+    /* first div is large, next are smaller */
+    .SkeletonContainer > div:not(:first-child) {
+        width: 60%;
+        padding: 0.6em;
+    }
+.SkeletonContainerIngredients {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    margin-top: 2em;
+}
+    /* first div */
+    .SkeletonContainerIngredients > div:first-child {
+        width: 40%;
+    }
+    /* first div is large, next are smaller */
+    .SkeletonContainerIngredients > div:not(:first-child) {
+        width: 30%;
+        padding: 0.6em;
+    }
+
 .MainContainer {
     display: flex;
     flex-direction: column;
@@ -42,7 +90,7 @@
         .RecipeNameContainer > h2 {
             color: var(--green-colorbl);
             font-size: 1rem;
-            font-weight: 900;
+            font-weight: 500;
             letter-spacing: 1px;
             padding-bottom: 0.2em;
             overflow-wrap: break-word;
@@ -51,7 +99,7 @@
         .RecipeNameContainer > a {
             color: var(--green-colorbl);
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 300;
             letter-spacing: 1px;
             overflow-wrap: break-word;
         }
@@ -64,12 +112,11 @@
             letter-spacing: 1px;
             overflow-wrap: break-word;
         }
-
 .RecipeNutrition {
     display: flex;
     justify-content: center;
     gap: 2em;
-    margin-bottom: 1em;
+    padding: 1em;
     background-color: var(--green-colorgrli);
 }
 .RecipeNutritionItem {
@@ -78,7 +125,6 @@
     align-items: center;
     justify-content: flex-end;
     gap: 0.8em;
-    padding: 1em;
     background-color: var(--green-colorgrli);
     text-align: center;
     overflow: hidden;
@@ -99,33 +145,37 @@
     display: flex;
     flex-direction: column;
     gap: 0.8em;
-    padding-bottom: 2em;
+    padding: 2em 0 2em 0;
+    width: fit-content;
     overflow: hidden;
 }
     /* title */
     .IngredientsContainer > h1 {
+        padding-bottom: 0.5em;
         color: var(--green-colorbl);
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 700;
     }
     /* items */
     .IngredientsContainer > h2 {
+        padding-bottom: 0.5em;
         color: var(--green-colorbl);
-        font-size: 1.2rem;
-        font-weight: 400;
+        font-size: 1.1rem;
+        font-weight: 300;
+        border-bottom: 1px solid var(--grey-colorli);
     }
 .StepsContainer {
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
     line-height: 2rem;
     padding-bottom: 2em;
     overflow: hidden;
 }
     /* title */
     .StepsContainer > h1 {
+        padding-bottom: 1em;
         color: var(--green-colorbl);
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 700;
     }
 .StepsItem {
@@ -140,12 +190,26 @@
     }
     /* item */
     .StepsItem > h2 {
+        padding-bottom: 1em;
         padding-left: 0.8em;
         border-left: 1px solid var(--green-color3);
         color: var(--green-colorbl);
-        font-size: 1.2rem;
-        font-weight: 400;
+        font-size: 1.1rem;
+        font-weight: 300;
     }
+
+@media print {
+    .HidePrint {
+        display: none;
+    }
+    .MainContainer {
+        padding: 0;
+    }
+    .ParentContainer {
+        padding: 2em;
+        border-radius: 0;
+    }
+}
 
 /* Phones */
 @media (max-width: 576px) { 
@@ -177,6 +241,7 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
+        padding: 0.5em;
         gap: 0.5em;
         background-color: var(--green-colorgrli);
     }
@@ -210,7 +275,7 @@
     /* item */
     .StepsItem > h2 {
         padding-left: 0.8em;
-        border-left: 1px solid var(--green-color3);
+        border-left: 2px solid var(--green-color3);
         color: var(--green-colorbl);
         font-size: 1rem;
         font-weight: 400;

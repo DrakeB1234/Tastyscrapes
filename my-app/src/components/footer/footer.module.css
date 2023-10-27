@@ -1,0 +1,13 @@
+.MainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green-colorgr);
+}
+.ParentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: clamp(100px, 100%, 1200px);
+    padding: 1em; 
+}

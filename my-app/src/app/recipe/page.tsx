@@ -3,6 +3,8 @@ import Link from 'next/link'
 import styles from '@/styles/recipes.module.css'
 import { FormatHTML_URL } from './formatrecipe'
 import Navbar from '@/components/navbar/navbar'
+import Footer from '@/components/footer/footer'
+import ActionContainer from '@/components/actioncontainer/actioncontainer'
 
 export default async function Recipe({
   searchParams,
@@ -14,8 +16,10 @@ export default async function Recipe({
 
   const GetData = async (url: string) => {
     try {
+        // Cause Delay
+        // await new Promise(resolve => setTimeout(resolve, 3000));
         // Fetch data from URL and store the response into a const
-        const res = await fetch(url);
+        const res = await fetch(url)
         // Convert the response into text
         const body = await res.text();
         // Convert HTML into usuable data
@@ -33,21 +37,24 @@ export default async function Recipe({
 
   return (
     <>
-      <Navbar searchBar={true} />
+      <div className={styles.HidePrint}>
+        <Navbar searchBar={true} />
+      </div>
       <main className={styles.MainContainer}>
         <div className={styles.ParentContainer}>
+
 
           <div className={styles.TitleContainer}>
             <Image 
             height={150} 
             width={150} 
             alt='' 
-            src={recipeData?.recipeImg ? recipeData?.recipeImg : ''}
+            src={recipeData?.recipeImg ? recipeData?.recipeImg : '/graphics/images/missing-image.png'}
             />
             <div className={styles.RecipeNameContainer}>
               <h1>{recipeData?.recipeName}</h1>
               <h2>Creator: {recipeData?.recipeCreator}</h2>
-              <Link href={recipeData ? recipeData.originURL : ''} target='_blank'>From: {recipeData?.originHostname}</Link>
+              <Link href={recipeData?.originURL ? recipeData.originURL : ''} target='_blank'>From: {recipeData?.originHostname}</Link>
               <h3>Edited by Clarified Recipes User</h3>
             </div>
           </div>
@@ -90,6 +97,10 @@ export default async function Recipe({
             }
           </div>
 
+          <div className={styles.HidePrint}>
+            <ActionContainer />
+          </div>
+
           <div className={styles.IngredientsContainer}>
             <h1>Ingredients</h1>
             {recipeData?.ingredientData?.map((ele: any, idx: number) => <h2 key={`ingredient-${idx}`}>{ele}</h2>)}
@@ -107,6 +118,7 @@ export default async function Recipe({
 
         </div>
       </main>
+      <Footer />
     </>
   )
 }
