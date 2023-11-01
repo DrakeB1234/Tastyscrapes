@@ -58,7 +58,7 @@ const {
                         width={20}
                         height={20}
                         alt='>'
-                        src={'/graphics/icons/icon-right-arrow.svg'}
+                        src={'/graphics/icons/icon-rightarrow-outline.svg'}
                         />
                     </button>
                 </div>

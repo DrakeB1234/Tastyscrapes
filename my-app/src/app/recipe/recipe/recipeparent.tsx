@@ -1,18 +1,26 @@
 'use client'
 
 import styles from './recipeparent.module.css'
+import { useState } from 'react'
 
-import StyleOne from '../recipeview/styleone'
+import RecipeStyleOne from '../recipeview/styleone'
+import RecipePrint from '../recipeprint/recipeprint'
 
-export default async function RecipeParent(props: any) {
+export default function RecipeParent(props: any) {
+
+  const [togglePrint, setTogglePrint] = useState(false);
 
   return (
-    <main className={styles.MainContainer}>
+    <>
+      {togglePrint
+      ? <RecipePrint recipeData={props.recipeData} togglePrint={setTogglePrint} />
+      :
+      <main className={styles.MainContainer + ' ' + styles.HidePrint}>
         <div className={styles.RecipeView}>
-            <StyleOne recipeData={props.recipeData} />
+            <RecipeStyleOne recipeData={props.recipeData} togglePrint={setTogglePrint} />
         </div>
-        <div className={styles.PrintView}>
-        </div>
-    </main>
+      </main>
+      }
+    </>
   )
 }
