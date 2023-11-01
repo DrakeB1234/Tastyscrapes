@@ -1,11 +1,11 @@
 <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="icon-printer-outline">
-<rect id="Rectangle 107" x="2" y="12" width="46" height="25" rx="4" fill="#6ACA68"/>
-<rect id="Rectangle 108" x="11" y="3" width="28" height="24" stroke="#6ACA68" stroke-width="2"/>
-<rect id="Rectangle 109" x="10" y="28" width="30" height="19" fill="white" stroke="#6ACA68" stroke-width="2"/>
-<circle id="Ellipse 21" cx="41.5" cy="19.5" r="2.5" fill="white"/>
-<rect id="Rectangle 110" x="13" y="32" width="13" height="2" rx="1" fill="#6ACA68"/>
-<rect id="Rectangle 111" x="13" y="36" width="23" height="2" rx="1" fill="#6ACA68"/>
-<rect id="Rectangle 112" x="13" y="40" width="17" height="2" rx="1" fill="#6ACA68"/>
+<rect id="Rectangle 107" x="3" y="12" width="44" height="24" rx="3" stroke="#263041" stroke-width="2"/>
+<rect id="Rectangle 108" x="11" y="3" width="28" height="9" stroke="#263041" stroke-width="2"/>
+<rect id="Rectangle 109" x="10" y="29" width="30" height="18" fill="white" stroke="#263041" stroke-width="2"/>
+<circle id="Ellipse 21" cx="41" cy="19" r="3" fill="white" stroke="#263041" stroke-width="2"/>
+<rect id="Rectangle 110" x="13" y="33" width="13" height="2" rx="1" fill="#263041"/>
+<rect id="Rectangle 111" x="13" y="37" width="23" height="2" rx="1" fill="#263041"/>
+<rect id="Rectangle 112" x="13" y="41" width="17" height="2" rx="1" fill="#263041"/>
 </g>
 </svg>

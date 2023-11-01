@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-    <Navbar searchBar={false} />
+    <Navbar searchBar={false} mobileLogo={true} />
     <main className={styles.MainLayout}>
       <div className={styles.MainContainer}>
 

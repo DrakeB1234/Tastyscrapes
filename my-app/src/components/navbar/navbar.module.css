@@ -8,24 +8,16 @@
     align-items: center;
     width: clamp(100px, 100%, 1200px);
     padding: 0.4em 1em 0.4em 1em; 
-    padding-bottom: 1.2em;
+    overflow: hidden;
 }
-    /* Header Link */
-    .ParentContainer > a {
-        color: var(--green-colorbl);
-        font-size: 1.8rem;
-        font-weight: 900;
-    }
-    .ParentContainer > form {
-        flex: 1;
-    }
 .SearchContainer {
     display: flex;
     align-items: center;
+    flex-wrap: nowrap;
     padding-left: 1.4em;
     margin-left: 2em;
     width: clamp(100px, 100%, 450px);
-    border: 2px solid var(--grey-colorli);
+    border: 2px solid var(--grey-25);
     border-radius: 8px;
 }
     /* Reset all defaults */
@@ -37,7 +29,7 @@
     /* text */
     .SearchContainer > input {
         width: 100%;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: var(--green-colorbl);
     }
         /* text placeholder */
@@ -47,14 +39,42 @@
     /* btn */
     .SearchContainer > button {
         display: flex;
-        padding: 1em 1.4em 1em 1em;
+        padding: 0.8em 1.4em 0.8em 0.8em;
         cursor: pointer;
     }
        /* btn */
        .SearchContainer > button:hover, .SearchContainer > button:active {
-        background-color: var(--grey-colorli);
+        background-color: var(--grey-25);
     }
+.BannerImage {
+    max-height: 50px;
+    width: 100%;
+}
 
+/* Phones */
 @media (max-width: 576px) { 
-    
+    .Mobile {
+        display: flex;
+    }
+    .Desktop {
+        display: none;
+    }
+    .ParentContainer {
+        padding: 1em 0.6em 1em 0.6em; 
+    }
+}
+/* Bigger devices */
+@media (min-width: 576px) { 
+    .Mobile {
+        display: none;
+    }
+    .Desktop {
+        display: flex;
+    }
+}
+
+@media print {
+    .MainContainer {
+        display: none;
+    }
 }

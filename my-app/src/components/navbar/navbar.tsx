@@ -12,6 +12,7 @@ type Inputs = {
 
 type Props = {
     searchBar: boolean,
+    mobileLogo?: boolean,
 }
 
 export default function Navbar(props: Props){
@@ -33,14 +34,15 @@ const {
 
   return (
     <div className={styles.MainContainer}>
-        <div className={styles.ParentContainer}>
+        <div className={styles.ParentContainer + ' ' + styles.Desktop}>
             <Link href={'/'}>                    
                 <Image 
-                width={100}
-                height={70}
+                width={428}
+                height={80}
                 quality={100}
                 alt='>'
-                src={'/graphics/icons/ClarifiedRecipe.png'}
+                src={'/graphics/images/banner.png'}
+                className={styles.BannerImage}
                 />
             </Link>
 
@@ -63,8 +65,23 @@ const {
             </form>
             : <></>
             }
-
         </div>
+            {props.mobileLogo
+            ?
+            <div className={styles.ParentContainer + ' ' + styles.Mobile}>
+                <Link href={'/'}>                    
+                    <Image 
+                    width={428/2.5}
+                    height={80/2.5}
+                    quality={100}
+                    alt='<'
+                    src={'/graphics/images/banner.png'}
+                    />
+                </Link>
+            </div>
+            :
+            <></>
+            }
     </div>
   )
 }

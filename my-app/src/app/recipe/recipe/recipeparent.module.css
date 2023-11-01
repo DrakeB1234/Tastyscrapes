@@ -1,0 +1,37 @@
+.MainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    overflow-y: hidden;
+}
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .MainContainer::-webkit-scrollbar {
+        display: none;
+    }
+.RecipeView {
+    width: clamp(100px, 100%, 1000px);
+    margin-top: 2em;
+    box-shadow: 0 0.1em 0.5em var(--grey-50);
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+@media print {
+    .HidePrint {
+        display: none;
+    }
+}
+
+/* Phones */
+@media (max-width: 576px) { 
+    .RecipeView {
+        margin: 0.5em;
+        box-shadow: none;
+        border-radius: 10px;
+        overflow-y: scroll;
+    }
+    .SelectorContainer {
+        margin-bottom: 1em;
+    }
+}

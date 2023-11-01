@@ -1,13 +1,15 @@
 :root {
-  --grey-colorli: #e9e9e9;
-  --green-colorbl: #343b35;
-  --green-colorgrli: #e7f6e7;
-  --green-colorgr: #b3beb4;
-  --green-color1: #618264;
-  --green-color2: #6aca68;
-  --green-color3: #B0D9B1;
-  --green-color4: #D0E7D2;
-
+  /* Light Scheme */
+  --colorli-1: #264653;
+  --colorli-2: #2a9d8f;
+  --colorli-3: #e9c46a;
+  --colorli-4: #f4a261;
+  --colorli-5: #e76f51;
+  /* Grays */
+  --grey-100: rgb(44, 44, 44);
+  --grey-75: rgb(146, 146, 146);
+  --grey-50: rgb(195, 195, 195);
+  --grey-25: rgb(234, 234, 234);
 }
 
 * {

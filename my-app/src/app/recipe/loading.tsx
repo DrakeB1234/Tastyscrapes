@@ -7,7 +7,7 @@ export default function Loading() {
     return (
         <main className={styles.MainContainer}>
             <div className={styles.HidePrint}>
-                <Navbar searchBar={false} />
+                <Navbar searchBar={false} mobileLogo={true} />
             </div>
             <div className={styles.ParentContainer}>
                 <div className={styles.TitleContainer}>
