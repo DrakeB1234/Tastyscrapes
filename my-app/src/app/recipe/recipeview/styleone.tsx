@@ -3,11 +3,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './styleone.module.css'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
 import { AddRecipe } from '@/db/dbhelpers'
 
 export default function RecipeStyleOne(props: any) {
+
+    const pathName = usePathname();
 
     const [addLoadingState, setAddLoadingState] = useState(false);
     const [successAddState, setSuccessAddState] = useState(false);
@@ -25,6 +28,18 @@ export default function RecipeStyleOne(props: any) {
         }
         setAddLoadingState(false);
     }
+
+    const ShareData = async () => {
+        try {
+          await navigator.share({
+            title: 'Tastyscrapes',
+            text: 'Remove all the fluff off your favorite recipes!',
+            url: pathName
+          })
+        } catch(error) {
+            props.errorCallback(error)
+        }
+      }
     
   return (
     <>
@@ -123,7 +138,10 @@ export default function RecipeStyleOne(props: any) {
                 src='/graphics/icons/icon-printer-outline.svg'
                 /> 
             </button>
-            <button className={styles.SelectButton}>
+            <button 
+            onClick={() => ShareData()} 
+            className={styles.SelectButton}
+            >
                 <Image
                 width={25}
                 height={25}

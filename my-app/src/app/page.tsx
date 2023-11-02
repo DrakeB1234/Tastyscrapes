@@ -32,7 +32,6 @@ export default function Home() {
 
   const GetRecipeCardData = async () => {
     const res: any = await GetRecipes()
-    console.log(res.data)
     setRecipeCardData(res.data)
   }
 
@@ -163,7 +162,7 @@ export default function Home() {
             <div className={styles.RecipeCardContainer}>
 
               {recipeCardData.map((e: any) => (
-                <Link href={e.originURL} className={styles.RecipeCard}>
+                <Link href={`/recipebox?name=${e.recipeName}&id=${e.id}`} className={styles.RecipeCard}>
                 <Image 
                 width={300}
                 height={150}

@@ -59,6 +59,29 @@ export const GetRecipes = async () => {
     }
 }
 
+export const GetRecipesID = async (id: number) => {
+    try {
+        // Check for invalid id
+        if (id == undefined || Number.isNaN(id) || id == 0) {
+            throw new Error('Invalid recipe id provided. Please try again.');
+        }
+
+        // Check for repeat URLs to avoid duplicate recipes
+        const res: any = await recipesTable
+        .get(id);
+
+        return {
+            status: 'success',
+            data: res
+        };
+    } catch (error) {
+        return {
+            status: 'error',
+            data: error
+        };
+    }
+}
+
 export const ClearTable = async () => {
     try {
 
