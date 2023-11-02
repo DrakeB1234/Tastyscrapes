@@ -94,7 +94,7 @@
     flex-direction: column;
     width: clamp(100px, 100%, 1000px);
     padding: 3em 4em 3em 4em;
-    box-shadow: 0 0.1em 0.4em var(--green-colorgr);
+    box-shadow: 0 0.1em 0.4em var(--grey-25);
     border-radius: 20px;
 }
 .TitleContainer {

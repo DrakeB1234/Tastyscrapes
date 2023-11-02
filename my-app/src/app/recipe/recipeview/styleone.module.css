@@ -5,25 +5,16 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1em;
     padding: 1em;
 }
     /* back arrow */
     .SelectorContainer > a:first-child {
         margin-right: auto;
-        display: flex;
-        justify-content: center;
-        padding: 0.8em;
-        border: 1px solid var(--grey-25);
-        border-radius: 50%;
-        cursor: pointer;
     }
-        /* hover */
-        .SelectorContainer > a:first-child:hover {
-            background-color: var(--grey-50);
-        }
     /* buttons */
-    .SelectorContainer > button {
+    .SelectorContainer > .SelectButton {
         display: flex;
         justify-content: center;
         padding: 0.8em;
@@ -33,9 +24,37 @@
         cursor: pointer;
     }
         /* hover */
-        .SelectorContainer > button:hover {
+        .SelectorContainer > .SelectButton:hover {
             background-color: var(--grey-50);
         }
+    .SaveButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8em;
+        padding: 0.8em;
+        border: 1px solid var(--colorli-5);
+        border-radius: 30px;
+        background-color: var(--colorli-5);
+        cursor: pointer;
+    }
+        .SaveButton > h1 {
+            font-size: 0.9rem;
+            color: white;
+        }
+        .SaveButton:hover {
+            background-color: var(--colorli-4);
+        }
+    .LoadButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.8em;
+        border: 1px solid var(--colorli-5);
+        border-radius: 50%;
+        background-color: var(--colorli-5);
+        cursor: pointer;
+    }
 .RecipeDataParent {
     padding-top: 1em;
 }
@@ -176,6 +195,10 @@
 @media print {
     .HidePrint {
         display: none;
+    }
+    .TitleContainer > img {
+        width: 100px;
+        height: 100px;
     }
 }
 

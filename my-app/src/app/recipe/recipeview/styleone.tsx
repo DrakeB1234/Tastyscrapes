@@ -3,16 +3,38 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from './styleone.module.css'
+import { useState } from 'react'
+
+import { AddRecipe } from '@/db/dbhelpers'
 
 export default function RecipeStyleOne(props: any) {
 
+    const [addLoadingState, setAddLoadingState] = useState(false);
+    const [successAddState, setSuccessAddState] = useState(false);
+
+    const RecipeAddItems = async () => {
+        setAddLoadingState(true);
+        const res = await AddRecipe(props.recipeData);
+        // Check for errors
+        if (res.status == 'success') {
+            console.log(res)
+            setSuccessAddState(true);
+        }
+        else {
+            props.errorCallback(res)
+        }
+        setAddLoadingState(false);
+    }
+    
   return (
     <div className={styles.MainContainer}>
 
         {!props.printView
          ?
         <div className={styles.SelectorContainer}>
-            <Link href={'/'}>
+            <Link href={'/'}
+            className={styles.SelectButton}
+            >
                 <Image
                 width={25}
                 height={25}
@@ -21,8 +43,56 @@ export default function RecipeStyleOne(props: any) {
                 src='/graphics/icons/icon-arrow-outline.svg'
                 />
             </Link>
+            {addLoadingState
+            ?
+            <button
+            className={styles.LoadButton}
+            >
+                <Image
+                width={25}
+                height={25}
+                quality={100}
+                alt='print'
+                src='/graphics/icons/icon-loading.svg'
+                /> 
+            </button>
+            :
+            <>
+            {!successAddState 
+            ?
+                <button
+                onClick={() => RecipeAddItems()}
+                className={styles.SaveButton}
+                >
+                    <h1>Save</h1>
+                    <Image
+                    width={25}
+                    height={25}
+                    quality={100}
+                    alt='print'
+                    src='/graphics/icons/icon-whiteplus-outline.svg'
+                    /> 
+                </button>
+            : 
+                <button
+                disabled={true}
+                className={styles.SelectButton}
+                >
+                    <Image
+                    width={25}
+                    height={25}
+                    quality={100}
+                    alt='print'
+                    src='/graphics/icons/icon-checkmark-outline.svg'
+                    /> 
+                </button>
+            }
+            </>
+            }
+
             <button
             onClick={() => props.togglePrint(true)}
+            className={styles.SelectButton}
             >
                 <Image
                 width={25}
@@ -32,7 +102,7 @@ export default function RecipeStyleOne(props: any) {
                 src='/graphics/icons/icon-printer-outline.svg'
                 /> 
             </button>
-            <button>
+            <button className={styles.SelectButton}>
                 <Image
                 width={25}
                 height={25}
@@ -41,15 +111,7 @@ export default function RecipeStyleOne(props: any) {
                 src='/graphics/icons/icon-share-outline.svg'
                 />
             </button>
-            <button>
-                <Image
-                width={25}
-                height={25}
-                quality={100}
-                alt='print'
-                src='/graphics/icons/icon-info-outline.svg'
-                />
-            </button>
+
         </div>
         : 
         <></>
