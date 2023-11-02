@@ -33,6 +33,24 @@ export default async function Recipe({
   if (searchParams && searchParams.url)
   {
     recipeData = await GetData(searchParams.url.toString());
+
+    // Avoid undefined error if no data is pulled at all from function
+    if (recipeData == undefined)
+    {
+      recipeData = {
+        originURL : null, 
+        originHostname : null, 
+        recipeCreator : null, 
+        recipeName : null,
+        recipeImg : null,
+        prepTime : null,
+        cookTime : null,
+        totalTime : null,
+        servings : null,   
+        ingredientData : [],
+        stepsData : [],
+      };
+    }
   }
 
   return (

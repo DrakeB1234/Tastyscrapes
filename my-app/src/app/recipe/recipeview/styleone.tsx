@@ -27,8 +27,29 @@ export default function RecipeStyleOne(props: any) {
     }
     
   return (
+    <>
+    {/* Check if data was properly scraped */}
+    {props.recipeData.ingredientData.length < 1 && props.recipeData.stepsData.length < 1 
+    ? 
     <div className={styles.MainContainer}>
-
+         <div className={styles.SelectorContainer}>
+            <Link href={'/'}
+            className={styles.SelectButton}
+            >
+                <Image
+                width={25}
+                height={25}
+                quality={100}
+                alt='print'
+                src='/graphics/icons/icon-arrow-outline.svg'
+                />
+            </Link>
+        </div>
+        
+        <h1>Nothing Found</h1>
+    </div>
+    :
+    <div className={styles.MainContainer}>
         {!props.printView
          ?
         <div className={styles.SelectorContainer}>
@@ -208,5 +229,7 @@ export default function RecipeStyleOne(props: any) {
 
         </div>
     </div>
+    }
+    </>
   )
 }

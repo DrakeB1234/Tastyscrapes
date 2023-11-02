@@ -2,29 +2,36 @@ import { db, recipesTable } from "./database.config"
 
 export const AddRecipe = async (recipeData: any) => {
     try {
+        // Check for repeat URLs to avoid duplicate recipes
+        const res: any = await recipesTable
+        .orderBy('originURL').keys()
 
-        // await recipesTable.add({
-        //     collection: recipeData.collection,
-        //     recipeImg: recipeData.recipeImg,
-        //     recipeName: recipeData.recipeName,
-        //     recipeCreator: recipeData.recipeCreator,
-        //     originURL: recipeData.originURL,
-        //     prepTime: recipeData.prepTime,
-        //     cookTime: recipeData.cookTime,
-        //     totalTime: recipeData.totalTime,
-        //     servings: recipeData.servings,
-        //     ingredientData: recipeData.ingredientData,
-        //     stepsData: recipeData.stepsData
-        // });
+        if (res.includes(recipeData.originURL)) {
 
-        await new Promise(resolve => setTimeout(resolve, 1000));
+            throw new Error('This recipes URL has already been saved, Duplicate Value');
+        }
+        else {
 
-        throw Error;
-
-        return {
-            status: 'success',
-            data: 'Item added successfully!'
-        };
+            await recipesTable.add({
+                collection: recipeData.collection,
+                recipeImg: recipeData.recipeImg,
+                recipeName: recipeData.recipeName,
+                recipeCreator: recipeData.recipeCreator,
+                originURL: recipeData.originURL,
+                originHostname: recipeData.originHostname,
+                prepTime: recipeData.prepTime,
+                cookTime: recipeData.cookTime,
+                totalTime: recipeData.totalTime,
+                servings: recipeData.servings,
+                ingredientData: recipeData.ingredientData,
+                stepsData: recipeData.stepsData
+            });
+    
+            return {
+                status: 'success',
+                data: 'Item added successfully!'
+            };
+        }
     } catch (error) {
         return {
             status: 'error',
@@ -33,10 +40,12 @@ export const AddRecipe = async (recipeData: any) => {
     }
 }
 
-export const GetItems = async () => {
+export const GetRecipes = async () => {
     try {
 
-        const res = await recipesTable.toArray();
+        // Check for repeat URLs to avoid duplicate recipes
+        const res: any = await recipesTable
+        .toArray();
 
         return {
             status: 'success',

@@ -123,7 +123,7 @@
     /* change the look of recipe on smaller devices */
     .ParentContainer {
         padding: 0em;
-        box-shadow: 0 var(--green-colorgr);
+        box-shadow: none;
         border-radius: 0;
     }
     .SelectorContainer {

@@ -29,12 +29,13 @@
     /* text */
     .SearchContainer > input {
         width: 100%;
-        font-size: 1rem;
-        color: var(--green-colorbl);
+        font-size: 1.1rem;
+        color: var(--grey-100);
     }
         /* text placeholder */
         .SearchContainer > input::placeholder {
-            color: var(--green-colorgr);
+            font-weight: 300;
+            color: var(--grey-100);
         }
     /* btn */
     .SearchContainer > button {

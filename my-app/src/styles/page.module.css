@@ -1,20 +1,35 @@
 .MainLayout {
     display: flex;
     flex-direction: column;
-    padding: 0.5em;
+    overflow: hidden;
+    padding-bottom: 4em;
 }
 .MainContainer {
     display: flex;
     flex-direction: column;
 }
+.LogoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3em 0 2em 0;
+    background-color: var(--colorli-1);
+}
+    .LogoContainer > form {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 .SearchContainer {
     display: flex;
     align-items: center;
+    margin-top: 1em;
     padding-left: 1.4em;
-    margin-left: 2em;
-    width: clamp(100px, 100%, 450px);
-    border: 2px solid var(--grey-100);
+    width: clamp(100px, 100%, 500px);
+    border: 2px solid var(--grey-75);
     border-radius: 8px;
+    box-shadow: 0 0 1em var(--grey-100);
+    background-color: white;
 }
     /* Reset all defaults */
     .SearchContainer > input, .SearchContainer > button {
@@ -26,11 +41,12 @@
     .SearchContainer > input {
         width: 100%;
         font-size: 1.1rem;
-        color: var(--green-colorbl);
+        color: var(--grey-100);
     }
         /* text placeholder */
         .SearchContainer > input::placeholder {
-            color: var(--green-colorgr);
+            font-weight: 300;
+            color: var(--grey-100);
         }
     /* btn */
     .SearchContainer > button {
@@ -40,5 +56,156 @@
     }
        /* btn */
        .SearchContainer > button:hover, .SearchContainer > button:active {
-        background-color: var(--grey-colorli);
+        background-color: var(--grey-25);
     }
+
+/* slider */
+.SliderMainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    justify-content: center;
+    padding: 2em;
+    background-color: var(--colorli-1);
+}
+    .SliderMainContainer > h1 {
+        font-size: 1.4rem;
+        color: white;
+    }
+.SliderContainer {
+    display: grid;
+    place-items: center;
+    width: clamp(100px, 100%, 600px);
+    overflow: hidden;
+}
+.SliderTrack {
+    display: flex;
+    width: calc(150px * 8);
+    animation: Scroll 40s linear infinite;
+}
+.Slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    height: 120px;
+    width: 150px;
+}
+    .Slide > img {
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 0 0.8em var(--grey-100);
+    }
+    .Slide > h1 {
+        font-size: 1.2rem;
+        font-weight: 900;
+        color: white;
+        overflow-wrap: break-word;
+    }
+@keyframes Scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-150px * 4)); }
+}
+
+.RecipeMainContainer {
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+.RecipeContainer {
+    display: flex;
+    flex-direction: column;
+    width: clamp(100px, 100%, 1200px);
+    padding: 2em;
+    box-shadow: 0 0.1em 0.5em var(--grey-50);
+    border-radius: 20px;
+    overflow: hidden;
+}
+    .RecipeContainer > h1 {
+        font-size: 1.6rem;
+        color: var(--grey-100);
+    }
+.RecipeCardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1em;
+    padding-top: 2em;
+}
+    .RecipeCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;   
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: 0 0.1em 0.5em var(--grey-50);
+        overflow: hidden;
+    }
+        .RecipeCard > img {
+            width: 100%;
+            aspect-ratio: 1 / 2;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .TextContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0.5em;
+        }
+            .TextContainer > h1 {
+                font-size: 1.3rem;
+                color: var(--grey-100);
+                overflow-wrap: break-word;
+            }
+            .TextContainer > h2 {
+                font-size: 1.1rem;
+                font-weight: 300;
+                color: var(--grey-100);
+                overflow-wrap: break-word;
+            }
+
+/* Phones */
+@media (max-width: 576px) {
+    .RecipeMainContainer {
+        padding: 0.5em;
+        padding-top: 1em;
+    }
+    .RecipeContainer {
+        padding: 0.5em;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    /* Logo Container */
+    .LogoContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em;
+        padding: 2em;
+        background-color: var(--colorli-1);
+    }
+        .LogoContainer > img {
+            height: auto;
+            width: 80%;
+        }
+    /* Slider */
+    .Slide {
+        height: 80px;
+    }
+    .Slide > img {
+        height: 45px;
+        width: 45px;
+    }
+    /* Recipe Cards */
+    .RecipeCardContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1em;
+        padding-top: 2em;
+    }
+}
