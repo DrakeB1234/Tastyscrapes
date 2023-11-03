@@ -33,7 +33,7 @@ export default function RecipeParent(props: any) {
       :
       <main className={styles.MainContainer + ' ' + styles.HidePrint}>
         {/* Check if data is present */}
-        {props.recipeData.recipeName == null
+        {props.recipeData.recipeName == null || props.recipeData?.ingredientData.length == 0
         ? 
         <div className={styles.RecipeMissingView}>
           <MissingRecipe type={'failURL'} />

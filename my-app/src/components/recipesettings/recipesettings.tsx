@@ -5,9 +5,10 @@ import styles from './recipesettings.module.css'
 import { useState } from 'react'
 
 import MessagePopup from '../messagepopup/messagepop'
-import { ClearTable } from '@/db/dbhelpers'
+import { ClearTable, ExportDB, ImportDB } from '@/db/dbhelpers'
 
 export default function RecipeSettings(props: any) {
+    
     const [toggleDialog, setToggleDialog] = useState(false);
     const [message, setMessage] = useState('');
     const [currentCallback, setCurrentCallback] = useState('');
@@ -22,6 +23,50 @@ export default function RecipeSettings(props: any) {
         const res = await ClearTable();
         setToggleDialog(false);
         location.reload();
+    }
+
+    const ImportRecipeDB = async () => {
+        var importinput = document.createElement('input');
+        importinput.type = 'file';
+        importinput.accept = '.json';
+        importinput.onchange = (e: any) => { 
+            CheckImportFile(e.target?.files[0]); 
+        }
+
+        importinput.click();
+    }
+
+    const CheckImportFile = async (file: File) => {
+        // if file name includes correct strings
+        if (file.name.includes('tastyscrapes-recipes') && file.type == 'application/json') {
+            // call import function
+            const res = await ImportDB(file)
+            if (res.status == 'error') { console.error(res.data); }
+            else {
+                location.reload();
+            }
+        }
+    }
+
+    const ExportRecipeDB = async () => {
+        let res: any = await ExportDB();
+
+        // change each id to have 'i' in front for to solve importing issues
+        res = await res.data.text();
+        res = res.replaceAll(/(?<=id":).*?(?=\,)/g, (match: any) => {
+            return `-${Math.floor(Math.random() * (90000 - 10000 + 1) + 10000)}`
+        });
+        res = new Blob([res], {
+            type:'text/json'
+        });
+        
+        // get current date
+        const date = new Date();
+        // open up window to download blob
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(res);
+        link.download = `tastyscrapes-recipes--${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}--${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}.json`
+        link.click();
     }
 
   return (
@@ -53,11 +98,13 @@ export default function RecipeSettings(props: any) {
 
                 <div className={styles.Group}>
                     <button
+                    onClick={ImportRecipeDB}
                     className={styles.NormalButton}
                     >
                         Import Recipes
                     </button>
                     <button
+                    onClick={ExportRecipeDB}
                     className={styles.NormalButton}
                     >
                         Export Recipes

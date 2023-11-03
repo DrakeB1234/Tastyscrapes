@@ -169,6 +169,7 @@
     }
     .IngredientInputContainer {
         display: flex;
+        align-items: center;
         gap: 2em;
         padding: 1px;
     }
@@ -177,6 +178,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            height: fit-content;
             padding: 0.5em;
             border: 0;
             border-radius: 50%;

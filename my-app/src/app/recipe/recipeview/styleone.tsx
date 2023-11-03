@@ -222,7 +222,20 @@ export default function RecipeStyleOne(props: any) {
                 </div>
             </div>
             }
-
+            {props.recipeData?.notesData
+            ?
+            <div className={styles.NotesContainer}>
+                <h1>Notes</h1>
+                <ul>
+                {props.recipeData?.notesData?.map((ele: any, idx: number) => (
+                    <li key={`note-${idx}`} className={styles.StepsItem}>
+                        {ele}
+                    </li>
+                ))}
+                </ul>
+            </div>
+            : <></>
+            }
         </div>
     </div>
   )

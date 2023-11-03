@@ -20,6 +20,7 @@ type Inputs = {
   servings: string | undefined,
   ingredients: {ingredient: string}[],
   steps: {step: string}[],
+  notes: {note: string}[] | undefined,
 }
 
 export default function RecipeBoxEdit({
@@ -56,7 +57,10 @@ export default function RecipeBoxEdit({
       res.data.stepsData?.forEach((e: any) => {
         stepsAppend({step: e});
       });
-
+      // Set notes
+      res.data.notesData?.forEach((e: any) => {
+        notesAppend({note: e});
+      });
     }
   }
 
@@ -96,6 +100,17 @@ export default function RecipeBoxEdit({
     }
   });
 
+  const { fields: notesFields, append: notesAppend, remove: notesRemove } = useFieldArray({
+    name: 'notes',
+    control,
+    rules: {
+        maxLength: {
+          value: 10,
+          message: 'Must have less than 10 notes'
+        }
+    }
+  });
+
   const onSubmit = (data: Inputs) => {
     // fix arrays
     let temp: any[] = [];
@@ -110,6 +125,18 @@ export default function RecipeBoxEdit({
       temp.push(e.step);
     });
     data.steps = temp;
+    temp = [];
+    // notes
+    // if no notes, set to undefined
+    if (data.notes?.length == 0) { 
+      data.notes = undefined;
+    }
+    else {
+      data.notes?.forEach(e => {
+        temp.push(e.note);
+      });
+      data.notes = temp;
+    }
 
     // Reconstruct Object to fit table schema
     const res = EditRecipe({
@@ -125,7 +152,8 @@ export default function RecipeBoxEdit({
       totalTime: data.totalTime,
       servings: data.servings,
       ingredientData: data.ingredients,
-      stepsData: data.steps
+      stepsData: data.steps,
+      notesData: data.notes,
     });
     location.replace(`/recipebox?id=${data.id}`);
   };
@@ -327,7 +355,7 @@ export default function RecipeBoxEdit({
                           message: 'Must have less than 2000 Characters'
                       }, 
                     })}
-                    autoComplete='off' type='text' placeholder='Step'
+                    autoComplete='off' placeholder='Step'
                     />
                     <button
                     onClick={() => stepsRemove(index)}
@@ -349,6 +377,57 @@ export default function RecipeBoxEdit({
                 if (stepsFields.length < 30){
                     stepsAppend({
                         step: '',
+                    })
+                }
+              }}              
+              >
+                <Image
+                width={25}
+                height={25}
+                quality={100}
+                alt='print'
+                src='/graphics/icons/icon-plus-outline.svg'
+                />
+              </button>
+            </div>
+
+            <div className={styles.IngredientsContainer}>
+              <h1>Notes</h1>
+              {notesFields.map((field: any, index:  number) => (
+                <div key={field.id}>
+                  <div className={styles.IngredientInputContainer}>
+                    <textarea {...register(`notes.${index}.note`, {
+                      required: {
+                        value: true,
+                        message: 'Required'
+                      },
+                      maxLength: {
+                          value: 2000,
+                          message: 'Must have less than 2000 Characters'
+                      }, 
+                    })}
+                    autoComplete='off' placeholder='Note'
+                    />
+                    <button
+                    onClick={() => notesRemove(index)}
+                    >
+                      <Image
+                      width={25}
+                      height={25}
+                      quality={100}
+                      alt='print'
+                      src='/graphics/icons/icon-trash-outline.svg'
+                      />
+                    </button>
+                  </div>
+                  {errors?.notes?.[index]?.note && <h1 className={styles.InputError}>{errors?.notes?.[index]?.note?.message}</h1>}
+                </div>
+              ))}
+              <button
+              onClick={() => {
+                if (notesFields.length < 10){
+                    notesAppend({
+                        note: '',
                     })
                 }
               }}              

@@ -244,15 +244,30 @@ export default function RecipeBox({
                     {recipeData?.ingredientData?.map((ele: any, idx: number) => <h2 key={`ingredient-${idx}`}>{ele}</h2>)}
                   </div>
 
-                    <div className={rstyles.StepsContainer}>
-                      <h1>Steps</h1>
-                      {recipeData?.stepsData?.map((ele: any, idx: number) => (
-                          <div key={`step-${idx}`} className={rstyles.StepsItem}>
-                          <h1>{`${idx + 1}`}</h1>
-                          <h2>{`${ele}`}</h2>
-                          </div>
-                      ))}
-                    </div>
+                  <div className={rstyles.StepsContainer}>
+                    <h1>Steps</h1>
+                    {recipeData?.stepsData?.map((ele: any, idx: number) => (
+                        <div key={`step-${idx}`} className={rstyles.StepsItem}>
+                        <h1>{`${idx + 1}`}</h1>
+                        <h2>{`${ele}`}</h2>
+                        </div>
+                    ))}
+                  </div>
+
+                  {recipeData?.notesData
+                  ?
+                  <div className={rstyles.NotesContainer}>
+                    <h1>Notes</h1>
+                    <ul>
+                    {recipeData?.notesData?.map((ele: any, idx: number) => (
+                        <li key={`note-${idx}`} className={rstyles.StepsItem}>
+                          {ele}
+                        </li>
+                    ))}
+                    </ul>
+                  </div>
+                  : <></>
+                  }
               </div>
           </div>
         </div>

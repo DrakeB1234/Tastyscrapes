@@ -40,7 +40,7 @@ export default function Home() {
 
   useEffect(() => {
     GetRecipeCardData();
-  }, [])
+  }, []);
 
   return (
     <>
@@ -183,8 +183,8 @@ export default function Home() {
 
             <div className={styles.RecipeCardContainer}>
 
-              {recipeCardData.map((e: any) => (
-                <Link href={`/recipebox?name=${e.recipeName}&id=${e.id}`} className={styles.RecipeCard}>
+              {recipeCardData.map((e: any, index: number) => (
+                <Link key={'recipe' + index} href={`/recipebox?name=${e.recipeName}&id=${e.id}`} className={styles.RecipeCard}>
                 <Image 
                 width={300}
                 height={150}

@@ -193,6 +193,35 @@
         font-size: 1.1rem;
         font-weight: 300;
     }
+.NotesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    width: fit-content;
+    overflow: hidden;
+}
+    /* title */
+    .NotesContainer > h1 {
+        padding-bottom: 1em;
+        color: var(--grey-100);
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+    /* list */
+    .NotesContainer > ul {
+        list-style: none;
+    }
+        /* list items */
+        .NotesContainer > ul > li {
+            color: var(--grey-100);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        .NotesContainer > ul > li::before{
+            color: var(--grey-100);
+            content: "\2022";
+            width: 50px;
+          }
 
 @media print {
     .HidePrint {

@@ -1,4 +1,5 @@
 import { db, recipesTable } from "./database.config"
+import { exportDB, importInto } from "dexie-export-import"
 
 export const AddRecipe = async (recipeData: any) => {
     try {
@@ -132,6 +133,42 @@ export const ClearTable = async () => {
         return {
             status: 'success',
             data: 'Data Cleared'
+        };
+    } catch (error) {
+        return {
+            status: 'error',
+            data: error
+        };
+    }
+}
+
+export const ExportDB = async () => {
+    try {
+
+        const res = await exportDB(db);
+
+        return {
+            status: 'success',
+            data: res
+        };
+    } catch (error) {
+        return {
+            status: 'error',
+            data: error
+        };
+    }
+}
+
+export const ImportDB = async (blob: Blob) => {
+    try {
+
+        const res = await importInto(db, blob, {
+            
+        });
+
+        return {
+            status: 'success',
+            data: res
         };
     } catch (error) {
         return {
