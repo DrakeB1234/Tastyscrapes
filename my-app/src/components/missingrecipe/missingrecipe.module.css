@@ -64,6 +64,9 @@
 
 /* Phones */
 @media (max-width: 576px) { 
+    .MainContainer {
+        border-radius: 0;
+    }
     .ImageContainer > img {
         max-width: 60%;
     }

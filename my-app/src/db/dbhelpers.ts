@@ -88,6 +88,42 @@ export const GetRecipesID = async (id: number) => {
     }
 }
 
+export const EditRecipe = async (data: any) => {
+    try {
+
+        await recipesTable.put(data);
+
+        console.log(data)
+
+        return {
+            status: 'success',
+            data: 'Recipe Edited'
+        };
+    } catch (error) {
+        return {
+            status: 'error',
+            data: error
+        };
+    }
+}
+
+export const DeleteRecipeID = async (id: number) => {
+    try {
+
+        const res = await recipesTable.delete(id);
+
+        return {
+            status: 'success',
+            data: 'Recipe Deleted'
+        };
+    } catch (error) {
+        return {
+            status: 'error',
+            data: error
+        };
+    }
+}
+
 export const ClearTable = async () => {
     try {
 

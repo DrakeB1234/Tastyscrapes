@@ -4,14 +4,14 @@ import Image from 'next/image'
 import styles from '@/styles/recipebox.module.css'
 import rstyles from '../recipe/recipeview/styleone.module.css'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import Navbar from '@/components/navbar/navbar'
 import RecipePrint from '../recipe/recipeprint/recipeprint'
 import MessagePopup from '@/components/messagepopup/messagepop'
 import MissingRecipe from '@/components/missingrecipe/missingrecipe'
-import { GetRecipesID } from '@/db/dbhelpers'
+import { DeleteRecipeID, GetRecipesID } from '@/db/dbhelpers'
 
 export default function RecipeBox({
   searchParams,
@@ -19,14 +19,16 @@ export default function RecipeBox({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
 
+  const router = useRouter();
   const pathName = usePathname();
 
   const [recipeData, setRecipeData] = useState<any>([]);
-  const [messageType, setMessageType] = useState('');
   const [message, setMessage] = useState('');
   const [toggleMessage, setToggleMessage] = useState(false);
   const [togglePrint, setTogglePrint] = useState(false);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [currentCallback, setCurrentCallback] = useState('');
+  const [toggleDialog, setToggleDialog] = useState(false);
 
   const GetRecipeCardData = async () => {
     // if no recipe id is present, set id to -1 
@@ -48,9 +50,20 @@ export default function RecipeBox({
     }
   }
 
+  const DeleteRecipeConfirm = () => {
+    setMessage('Are you sure you want to delete this recipe? This action cannot be reversed.');
+    setCurrentCallback('DeleteRecipe');
+    setToggleDialog(true);
+  }
+
+  const DeleteRecipe = async () => {
+    await DeleteRecipeID(recipeData.id);
+    setToggleDialog(false);
+    location.replace('/');
+  }
+
   const ErrorHandler = (error: any) => {
     console.error(error);
-    setMessageType('Error');
     setMessage(error.data?.message);
     setToggleMessage(true);
   }
@@ -63,14 +76,21 @@ export default function RecipeBox({
     <>
       <Navbar searchBar={false} mobileLogo={false} />
       {toggleMessage
-      ? <MessagePopup toggleMessage={setToggleMessage} messageType={messageType} message={message} />
+      ? <MessagePopup toggleMessage={setToggleMessage} messageType={'Error'} message={message} />
+      : <></>
+      }
+      {toggleDialog
+      ? 
+      <MessagePopup toggleMessage={setToggleDialog} messageType={'Dialog'} message={message}
+      callback={currentCallback == 'DeleteRecipe' ? DeleteRecipe : ''}
+      />
       : <></>
       }
       {togglePrint
       ? <RecipePrint recipeData={recipeData} togglePrint={setTogglePrint} />
       :
       <main className={styles.MainContainer}>
-        {recipeData == undefined
+        {recipeData == undefined || !searchParams?.id
         ? 
         <div className={styles.RecipeMissingView}>
           <MissingRecipe type={'failRecipe'}/>
@@ -115,8 +135,9 @@ export default function RecipeBox({
                       />
                   </button>
                   <div 
-                  onClick={() => setToggleDropdown(true)}
-                  className={rstyles.SelectButton}>
+                  onClick={() => setToggleDropdown(!toggleDropdown)}
+                  className={rstyles.SelectButton}
+                  >
                       <Image
                       width={25}
                       height={25}
@@ -127,7 +148,9 @@ export default function RecipeBox({
                       {toggleDropdown
                       ?
                       <div className={styles.DropDownMenu}>
-                        <button>
+                        <button
+                        onClick={() => router.push(`/recipeboxedit?id=${recipeData.id}`)}
+                        >
                           <Image
                           width={20}
                           height={20}
@@ -137,7 +160,9 @@ export default function RecipeBox({
                           />
                           Edit
                         </button>
-                        <button>
+                        <button
+                        onClick={DeleteRecipeConfirm}
+                        >
                           <Image
                           width={20}
                           height={20}
@@ -147,9 +172,7 @@ export default function RecipeBox({
                           />
                           Delete
                         </button>
-                        <button
-                        onClick={() => setToggleDropdown(false)}
-                        >
+                        <button>
                           <Image
                           width={20}
                           height={20}

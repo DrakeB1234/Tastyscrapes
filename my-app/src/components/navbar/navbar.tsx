@@ -17,7 +17,7 @@ type Props = {
 
 export default function Navbar(props: Props){
 
-const {
+    const {
     register,
     handleSubmit,
     reset,

@@ -132,6 +132,7 @@
 .TitleContainer {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 1em 0;
     flex-wrap: wrap;
 }
@@ -148,6 +149,11 @@
     }
         .TitleContainer > button {
             cursor: pointer;
+        }
+        .TitleContainer > h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--grey-100);
         }
         .TitleContainer > button > h1 {
             font-size: 1rem;
@@ -235,5 +241,10 @@
     /* Recipe Cards */
     .RecipeCardContainer {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    .TitleContainer > h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--grey-100);
     }
 }

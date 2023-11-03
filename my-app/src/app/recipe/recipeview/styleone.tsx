@@ -137,17 +137,17 @@ export default function RecipeStyleOne(props: any) {
         <div className={styles.RecipeDataParent}>
 
             <div className={styles.TitleContainer}>
-            <Image 
-            height={150} 
-            width={150} 
-            alt='' 
-            src={props.recipeData?.recipeImg ? props.recipeData?.recipeImg : '/graphics/images/missing-image.png'}
-            />
-            <div className={styles.RecipeNameContainer}>
-                <h1>{props.recipeData?.recipeName}</h1>
-                <h2>Creator: {props.recipeData?.recipeCreator}</h2>
-                <Link href={props.recipeData?.originURL ? props.recipeData.originURL : ''} target='_blank'>From: <span>{props.recipeData?.originHostname}</span></Link>
-            </div>
+                <Image 
+                height={150} 
+                width={150} 
+                alt='' 
+                src={props.recipeData?.recipeImg ? props.recipeData?.recipeImg : '/graphics/images/missing-image.png'}
+                />
+                <div className={styles.RecipeNameContainer}>
+                    <h1>{props.recipeData?.recipeName}</h1>
+                    <h2>Creator: {props.recipeData?.recipeCreator}</h2>
+                    <Link href={props.recipeData?.originURL ? props.recipeData.originURL : ''} target='_blank'>From: <span>{props.recipeData?.originHostname}</span></Link>
+                </div>
             </div>
 
             <div className={styles.RecipeNutrition}>
