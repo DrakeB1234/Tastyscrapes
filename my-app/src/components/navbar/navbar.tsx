@@ -26,10 +26,8 @@ const {
 
     const router = useRouter();
 
-
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        router.push(`/recipe?url=${data.url}`);
-        reset();
+        location.replace(`/recipe?url=${data.url}`);        
     };
 
   return (

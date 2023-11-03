@@ -4,8 +4,6 @@ import styles from './messagepop.module.css'
 
 export default function MessagePopup(props: any) {
 
-  console.log(props)
-
   return (
     <>
     {props.messageType == 'Error'
@@ -21,6 +19,27 @@ export default function MessagePopup(props: any) {
                 </button>
             </div>
         </main>
+    :
+    props.messageType == 'Dialog'
+    ?
+    <main className={styles.MainContainer}>
+      <div className={styles.DialogParentContainer}>
+          <h1>Confirm</h1>
+          <h2>{props.message ? props.message : 'Are you sure you want to continue with this action?'}</h2>
+          <div className={styles.ButtonContainer}>
+            <button
+            onClick={() => props.toggleMessage(false)}
+            >
+                Cancel
+            </button>
+            <button
+            onClick={() => props.callback ? props.callback() : props.toggleMessage(false)}
+            >
+                Confirm
+            </button>
+          </div>
+      </div>
+    </main>
     :
     <></>
     }
