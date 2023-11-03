@@ -1,0 +1,173 @@
+.MainContainer {
+    display: grid;
+    place-items: center;
+    padding: 1em;
+    overflow: hidden;
+    max-height: 98vh;
+}
+.ExitContainer {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 1em;
+    width: clamp(100px, 100%, 1200px);
+}    
+    .ExitContainer > a {
+        display: flex;
+        justify-content: center;
+        padding: 0.5em;
+        border: 1px solid var(--grey-25);
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+    }
+    .ExitContainer > a:hover {
+        background-color: rgb(248, 147, 147);
+    }
+.SkelMainContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: clamp(100px, 100%, 1200px);
+    padding: 2em;
+    box-shadow: 0 0.1em 0.5em var(--grey-50);
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(45deg,#ffffff, #fafafa, #f1f1f1);
+    background-size: 600% 100%;
+    animation: skeleton-loading-main 4s infinite linear alternate;
+}
+/* Recipe Cards */
+.SkelRecipeCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1em;
+    padding: 0.5em;
+    padding-top: 2em;
+    overflow: hidden;
+}
+    .SkelRecipeCards > div {
+        aspect-ratio: 1.5 / 1;
+        padding: 1em;
+        border-radius: 10px;
+        animation: skeleton-loading 0.8s infinite linear alternate;
+    }
+    /* Recipe */
+    .SkelRecipeTitle {
+        display: flex;
+        gap: 1em;
+        width: 100%;
+        padding: 1em;
+    }
+        /* img */
+        .SkelRecipeTitle > .SkelLoading {
+            height: 150px;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+            animation: skeleton-loading 0.8s infinite linear alternate;
+        }
+    /* text container */
+    .SkelRecipeText {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: clamp(10px, 100%, 600px);
+    }
+        /* text container */
+        .SkelRecipeText > .SkelLoading {
+            max-height: 20px;
+            border-radius: 6px;
+            aspect-ratio: 1/1;
+            animation: skeleton-loading 0.8s infinite linear alternate;
+            }
+                .SkelRecipeText > .SkelLoading:not(:first-child) {
+                    width: 60%;
+                }
+    /* nutrition container */
+    .SkelRecipeNutrition {
+        display: flex;
+        width: 100%;
+        padding: 1em;
+    }
+        .SkelRecipeNutrition > .SkelLoading {
+            width: 100%;
+            height: 60px;
+            border-radius: 6px;
+            animation: skeleton-loading 0.8s infinite linear alternate;
+        }
+    /* data container */
+    .SkelRecipeData {
+        display: flex;
+        gap: 1em;
+        width: 100%;
+        padding: 1em;
+    }
+        .SkelRecipeData > .SkelLoading {
+            width: 100%;
+            height: 25em;
+            border-radius: 6px;
+            animation: skeleton-loading 0.8s infinite linear alternate;
+        }
+    
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(196, 196, 196);
+    }
+    100% {
+        background-color: rgb(228, 228, 228);
+    }
+}
+
+@keyframes skeleton-loading-main {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+    .MainContainer {
+        padding: 0.5em;
+    }
+    .SkelMainContainer {
+        padding: 0em;
+        padding-top: 1em;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .SkelRecipeCards {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        padding: 0.3em;
+        padding-top: 2em;
+    }
+        .SkelRecipeCards > div {
+            aspect-ratio: 1 / 1;
+        }
+    /* Recipe */
+    .SkelRecipeTitle {
+        padding: 0;
+    }
+        /* img */
+        .SkelRecipeTitle > .SkelLoading {
+            height: 100px;
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+            animation: skeleton-loading 0.8s infinite linear alternate;
+        }
+    /* nutrition container */
+    .SkelRecipeNutrition {
+        padding: 0;
+    }
+        .SkelRecipeNutrition > .SkelLoading {
+            height: 200px;
+        }
+    /* data container */
+    .SkelRecipeData {
+        padding: 0;
+    }
+        .SkelRecipeData > .SkelLoading {
+            height: 35em;
+        }
+}

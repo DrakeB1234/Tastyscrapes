@@ -144,13 +144,19 @@ export const ClearTable = async () => {
 
 export const ExportDB = async () => {
     try {
+        // Check if user has recipes to export
+        const temp = await recipesTable.toArray();
+        if (temp.length < 1) {
+            throw new Error('No recipes to export!');
+        } 
+        else {
+            const res = await exportDB(db);
 
-        const res = await exportDB(db);
-
-        return {
-            status: 'success',
-            data: res
-        };
+            return {
+                status: 'success',
+                data: res
+            };
+        }
     } catch (error) {
         return {
             status: 'error',
@@ -161,15 +167,20 @@ export const ExportDB = async () => {
 
 export const ImportDB = async (blob: Blob) => {
     try {
+        let temp = await blob.text();
 
-        const res = await importInto(db, blob, {
-            
-        });
+        // Tries to match any "id" in blob, if none then no recipes found!
+        if (!temp.match(/(?<=id":).*?(?=\,)/g)) {
+            throw new Error('No recipes to import!');
+        }
+        else {
+            const res = await importInto(db, blob);
 
-        return {
-            status: 'success',
-            data: res
-        };
+            return {
+                status: 'success',
+                data: res
+            };
+        }
     } catch (error) {
         return {
             status: 'error',

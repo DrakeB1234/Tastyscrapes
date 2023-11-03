@@ -129,15 +129,20 @@
         font-size: 1.6rem;
         color: var(--grey-100);
     }
-.TitleContainer {
+.TitleContainer, .ButtonContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1em 0;
     flex-wrap: wrap;
 }
+    /* Button Container */
+    .ButtonContainer {
+        padding-top: 1em;
+    }
     /* buttons */
-    .TitleContainer > button {
+    .TitleContainer > button, 
+    .ButtonContainer > button, .ButtonContainer > a {
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -146,27 +151,28 @@
         border-radius: 30px;
         background: none;
         border: 1px solid var(--grey-25);
+        cursor: pointer;
     }
-        .TitleContainer > button {
-            cursor: pointer;
-        }
-        .TitleContainer > h1 {
+        .TitleContainer > h1, .ButtonContainer > h1 {
             font-size: 2rem;
             font-weight: 500;
             color: var(--grey-100);
         }
-        .TitleContainer > button > h1 {
+        .TitleContainer > button > h1, 
+        .ButtonContainer > button > h1, .ButtonContainer > a > h1 {
             font-size: 1rem;
             font-weight: 300;
             color: var(--grey-100);
         }
-        .TitleContainer > button:hover {
+        .TitleContainer > button:hover, 
+        .ButtonContainer > button:hover, .ButtonContainer > a:hover {
             background-color: var(--grey-50);
         }
 .RecipeCardContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1em;
+    padding: 0.5em;
     padding-top: 2em;
 }
     .RecipeCard {
@@ -209,14 +215,6 @@
 
 /* Phones */
 @media (max-width: 576px) {
-    .RecipeMainContainer {
-        padding: 0.5em;
-    }
-    .RecipeContainer {
-        padding: 0.5em;
-        border-radius: 0;
-        box-shadow: none;
-    }
     /* Logo Container */
     .LogoContainer {
         display: flex;
@@ -239,8 +237,18 @@
         width: 45px;
     }
     /* Recipe Cards */
+    .RecipeMainContainer {
+        padding: 0.5em;
+    }
+    .RecipeContainer {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
     .RecipeCardContainer {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        padding: 0.3em;
+        padding-top: 2em;
     }
     .TitleContainer > h1 {
         font-size: 1.5rem;

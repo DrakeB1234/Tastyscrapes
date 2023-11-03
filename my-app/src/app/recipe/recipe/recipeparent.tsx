@@ -20,7 +20,7 @@ export default function RecipeParent(props: any) {
     setMessageType('Error');
     setMessage(error.data?.message);
     setToggleMessage(true);
-  }
+  };
 
   return (
     <>

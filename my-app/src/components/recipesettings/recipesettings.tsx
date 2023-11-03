@@ -12,6 +12,7 @@ export default function RecipeSettings(props: any) {
     const [toggleDialog, setToggleDialog] = useState(false);
     const [message, setMessage] = useState('');
     const [currentCallback, setCurrentCallback] = useState('');
+    const [toggleMessage, setToggleMessage] = useState(false);
 
     const ClearAllRecipesConfirm = () => {
         setMessage('Are you sure you want to remove all recipes? This action cannot be reversed.');
@@ -41,7 +42,9 @@ export default function RecipeSettings(props: any) {
         if (file.name.includes('tastyscrapes-recipes') && file.type == 'application/json') {
             // call import function
             const res = await ImportDB(file)
-            if (res.status == 'error') { console.error(res.data); }
+            if (res.status == 'error') { 
+                ErrorHandler(res.data); 
+            }
             else {
                 location.reload();
             }
@@ -51,6 +54,10 @@ export default function RecipeSettings(props: any) {
     const ExportRecipeDB = async () => {
         let res: any = await ExportDB();
 
+        if (res.status == 'error') {
+            ErrorHandler(res);
+            return;
+        }
         // change each id to have 'i' in front for to solve importing issues
         res = await res.data.text();
         res = res.replaceAll(/(?<=id":).*?(?=\,)/g, (match: any) => {
@@ -59,7 +66,6 @@ export default function RecipeSettings(props: any) {
         res = new Blob([res], {
             type:'text/json'
         });
-        
         // get current date
         const date = new Date();
         // open up window to download blob
@@ -69,11 +75,23 @@ export default function RecipeSettings(props: any) {
         link.click();
     }
 
+    const ErrorHandler = (error: any) => {
+        console.error(error);
+        setMessage(error.data?.message ? error.data?.message : error.message);
+        setToggleMessage(true);
+    }
+
   return (
     <>
     {toggleDialog
     ? 
     <MessagePopup toggleMessage={setToggleDialog} messageType={'Dialog'} message={message} 
+    callback={currentCallback == 'ClearAll' ? ClearAllRecipes : null}
+    />
+    : <></>}
+    {toggleMessage
+    ? 
+    <MessagePopup toggleMessage={setToggleMessage} messageType={'Error'} message={message} 
     callback={currentCallback == 'ClearAll' ? ClearAllRecipes : null}
     />
     : <></>}

@@ -34,11 +34,10 @@
         font-size: 1.8rem;
     }
 .RowContainer {
-    display: flex;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1em;
 }
-    .RowContainer > div {
-        flex: 1;
-    }
 .RecipeViewParent {
     height: 450px;
     padding: 1em;
@@ -75,8 +74,10 @@
         display: flex;
         justify-content: center;
         gap: 1em;
+        padding: 0 1em 0 1em;
     }
         .LayoutButton {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -114,6 +115,9 @@
     .RecipeView {
         padding-top: 0;
         box-shadow: none;
+    }
+    .RowContainer {
+        display: flex;
     }
 }
 

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Navbar from '@/components/navbar/navbar'
-import styles from '@/styles/recipes.module.css'
+import styles from '@/styles/loading.module.css'
 
 export default function Loading() {
     return (
@@ -10,7 +10,7 @@ export default function Loading() {
                 <Navbar searchBar={false} mobileLogo={false} />
             </div>
 
-            <div className={styles.SelectorContainer}>
+            <div className={styles.ExitContainer}>
                 <Link href={'/'}>
                     <Image
                     width={25}
@@ -20,34 +20,26 @@ export default function Loading() {
                     src='/graphics/icons/icon-exit-outline.svg'
                     />
                 </Link>                
-                <div className={styles.SkeletonLoadingCircle} />
-                <div className={styles.SkeletonLoadingCircle} />
-                <div className={styles.SkeletonLoadingCircle} />
             </div>
 
-            <div className={styles.ParentContainer}>
-                <div className={styles.TitleContainer}>
-                    <div className={styles.SkeletonLoadingImage} />
-                    <div className={styles.SkeletonContainer}>
-                        <div className={styles.SkeletonLoading} />
-                        <div className={styles.SkeletonLoading} />
-                        <div className={styles.SkeletonLoading} />
+            <div className={styles.SkelMainContainer}>
+
+                <div className={styles.SkelRecipeTitle}>
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelRecipeText}>
+                        <div className={styles.SkelLoading} />
+                        <div className={styles.SkelLoading} />
+                        <div className={styles.SkelLoading} />
                     </div>
                 </div>
-                {/* Nutrition */}
-                <div className={styles.SkeletonLoadingNutrition}></div>
-
-                <div className={styles.SkeletonContainerIngredients}>
-                    <div className={styles.SkeletonLoading} />
-                    <div className={styles.SkeletonLoading} />
-                    <div className={styles.SkeletonLoading} />
+                <div className={styles.SkelRecipeNutrition}>
+                    <div className={styles.SkelLoading} />
+                </div>
+                <div className={styles.SkelRecipeData}>
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
                 </div>
 
-                <div className={styles.SkeletonContainerIngredients}>
-                    <div className={styles.SkeletonLoading} />
-                    <div className={styles.SkeletonLoading} />
-                    <div className={styles.SkeletonLoading} />
-                </div>
             </div>
         </main>
     )

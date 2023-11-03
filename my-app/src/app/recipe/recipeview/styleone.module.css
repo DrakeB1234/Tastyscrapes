@@ -134,7 +134,9 @@
         font-weight: 400;
     }
 .RowContainer {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1em;
 }
     .RowContainer > div {
         flex: 1;
@@ -230,6 +232,33 @@
     .TitleContainer > img {
         width: 100px;
         height: 100px;
+    }
+    .RecipeDataParent {
+        padding-top: 0;
+    }
+        /* ingredients */
+    /* title */
+    .IngredientsContainer > h1 {
+        font-size: 1.2rem;
+    }
+    /* items */
+    .IngredientsContainer > h2 {
+        font-size: 1rem;
+    }
+    /* steps */
+    /* title */
+    .StepsContainer > h1 {
+        font-size: 1.2rem;
+    }
+    /* steps */
+    .StepsItem > h1 {
+        padding-right: 4%;
+        font-size: 1.2rem;
+    }
+    /* item */
+    .StepsItem > h2 {
+        padding-left: 0.8em;
+        font-size: 1rem;
     }
 }
 

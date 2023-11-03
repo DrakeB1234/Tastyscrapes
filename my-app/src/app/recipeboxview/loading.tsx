@@ -23,23 +23,20 @@ export default function Loading() {
             </div>
 
             <div className={styles.SkelMainContainer}>
-
-                <div className={styles.SkelRecipeTitle}>
+                <div className={styles.SkelRecipeCards}>
                     <div className={styles.SkelLoading} />
-                    <div className={styles.SkelRecipeText}>
-                        <div className={styles.SkelLoading} />
-                        <div className={styles.SkelLoading} />
-                        <div className={styles.SkelLoading} />
-                    </div>
-                </div>
-                <div className={styles.SkelRecipeNutrition}>
                     <div className={styles.SkelLoading} />
-                </div>
-                <div className={styles.SkelRecipeData}>
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
+                    <div className={styles.SkelLoading} />
                     <div className={styles.SkelLoading} />
                     <div className={styles.SkelLoading} />
                 </div>
-
             </div>
         </main>
     )

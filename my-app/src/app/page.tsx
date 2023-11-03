@@ -34,7 +34,7 @@ export default function Home() {
 
   const GetRecipeCardData = async () => {
     // Limit applied
-    const res: any = await GetRecipes(12)
+    const res: any = await GetRecipes(8)
     setRecipeCardData(res.data)
   }
 
@@ -179,6 +179,20 @@ export default function Home() {
                 src={'/graphics/icons/icon-settings-outline.svg'}
                 />
               </button>
+            </div>
+
+            <div className={styles.ButtonContainer}>
+              <Link
+              href={'/recipeboxview'}
+              >
+                <h1>View All</h1>
+                <Image 
+                width={20}
+                height={20}
+                alt='>'
+                src={'/graphics/icons/icon-rightarrow-outline.svg'}
+                />
+              </Link>
             </div>
 
             <div className={styles.RecipeCardContainer}>

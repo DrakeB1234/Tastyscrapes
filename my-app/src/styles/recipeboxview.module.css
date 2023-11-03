@@ -1,0 +1,129 @@
+.MainContainer {
+    display: grid;
+    place-items: center;
+    padding: 1em;
+    padding-bottom: 4em;
+    overflow: hidden;
+}
+.RecipeContainer {
+    display: flex;
+    flex-direction: column;
+    width: clamp(100px, 100%, 1200px);
+    padding: 2em;
+    box-shadow: 0 0.1em 0.5em var(--grey-50);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.ExitContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+    .ExitContainer > a {
+        display: flex;
+        justify-content: center;
+        padding: 0.5em;
+        border: 1px solid var(--grey-25);
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+    }
+        .ExitContainer > a:hover {
+            background-color: var(--grey-50);
+        }
+.TitleContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em 0;
+    flex-wrap: wrap;
+}
+    /* buttons */
+    .TitleContainer > button {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1em;
+        padding: 0.5em 1em 0.5em 1em;
+        border-radius: 30px;
+        background: none;
+        border: 1px solid var(--grey-25);
+        cursor: pointer;
+    }
+        .TitleContainer > h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--grey-100);
+        }
+        .TitleContainer > button > h1 {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--grey-100);
+        }
+        .TitleContainer > button:hover {
+            background-color: var(--grey-50);
+        }
+.RecipeCardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1em;
+    padding: 0.5em;
+    padding-top: 2em;
+}
+    .RecipeCard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;   
+        border-radius: 10px;
+        width: 100%;
+        box-shadow: 0 0.1em 0.5em var(--grey-50);
+        overflow: hidden;
+    }
+    .RecipeCard:hover {
+        background-color: var(--grey-25);
+    }
+        .RecipeCard > img {
+            width: 100%;
+            aspect-ratio: 1 / 2;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .TextContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0.5em;
+        }
+            .TextContainer > h1 {
+                font-size: 1.3rem;
+                color: var(--grey-100);
+                overflow-wrap: break-word;
+            }
+            .TextContainer > h2 {
+                font-size: 1.1rem;
+                font-weight: 300;
+                color: var(--grey-100);
+                overflow-wrap: break-word;
+            }
+/* Phones */
+@media (max-width: 576px) {
+    .MainContainer {
+        padding: 0.5em;
+    }
+    .RecipeContainer {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .RecipeCardContainer {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        padding: 0.3em;
+        padding-top: 2em;
+    }
+    .TitleContainer > h1 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--grey-100);
+    }
+}
