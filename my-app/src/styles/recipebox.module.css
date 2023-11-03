@@ -6,6 +6,11 @@
     padding: 1em;
     padding-bottom: 4em;
 }
+.RecipeMissingView {
+    width: clamp(100px, 100%, 1000px);
+    box-shadow: 0 0.1em 0.8em var(--grey-75);
+    border-radius: 10px;
+}
 .RecipeView {
     width: clamp(100px, 100%, 1000px);
     margin-top: 2em;
@@ -14,6 +19,35 @@
     box-shadow: 0 0.1em 0.5em var(--grey-50);
     border-radius: 10px;
 }
+.DropDownMenu {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 0.1em 0.5em var(--grey-50);
+    border-radius: 10px;
+    background-color: white;
+    z-index: 2;
+}
+    .DropDownMenu > button {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        padding: 0.8em 6em 0.8em 0.5em;
+        background: none;
+        border: none;
+        border-bottom: 1px solid var(--grey-25);
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: var(--grey-100);
+        cursor: pointer;
+        z-index: 3;
+    }
+        .DropDownMenu > button:hover {
+            background-color: var(--grey-25);
+        }
 
 /* Phones */
 @media (max-width: 576px) { 
@@ -21,11 +55,17 @@
         padding: 0;
         padding-bottom: 4em;
     }
+    .RecipeMissingView {
+        box-shadow: none;
+    }
     .RecipeView {
         margin: 0.5em;
         padding: 0;
         box-shadow: none;
         border-radius: 10px;
         overflow-y: scroll;
+    }
+    .DropDownMenu > button {
+        padding: 0.8em 3em 0.8em 0.5em;
     }
 }

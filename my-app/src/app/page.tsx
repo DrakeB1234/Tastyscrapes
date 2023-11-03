@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { GetRecipes } from '@/db/dbhelpers'
+import RecipeSettings from '@/components/recipesettings/recipesettings'
 
 type Inputs = {
   url: string
@@ -16,6 +17,7 @@ type Inputs = {
 export default function Home() {
 
   const [recipeCardData, setRecipeCardData] = useState([]);
+  const [toggleRecipeSettings, setToggleRecipeSettings] = useState(false);
 
   const {
     register,
@@ -31,7 +33,8 @@ export default function Home() {
   };
 
   const GetRecipeCardData = async () => {
-    const res: any = await GetRecipes()
+    // Limit applied
+    const res: any = await GetRecipes(12)
     setRecipeCardData(res.data)
   }
 
@@ -41,6 +44,10 @@ export default function Home() {
 
   return (
     <>
+    {toggleRecipeSettings
+    ? <RecipeSettings toggle={setToggleRecipeSettings} />
+    : <></>
+    }
     <main className={styles.MainLayout}>
       <div className={styles.MainContainer}>
 
@@ -56,7 +63,7 @@ export default function Home() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className={styles.SearchContainer}>
                     <input {...register("url", { required: true })} 
-                    placeholder='Paste a URL'
+                    placeholder='Paste a URL to Clean Up Your Recipe'
                     />
                     <button type="submit">
                         <Image 
@@ -158,7 +165,22 @@ export default function Home() {
 
         <div className={styles.RecipeMainContainer}>
           <div className={styles.RecipeContainer}>
-            <h1>Recipe Box</h1>
+
+            <div className={styles.TitleContainer}>
+              <h1>Recipe Box</h1>
+              <button
+              onClick={() => setToggleRecipeSettings(true)}
+              >
+                <h1>Settings</h1>
+                <Image 
+                width={20}
+                height={20}
+                alt='>'
+                src={'/graphics/icons/icon-settings-outline.svg'}
+                />
+              </button>
+            </div>
+
             <div className={styles.RecipeCardContainer}>
 
               {recipeCardData.map((e: any) => (

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import RecipeStyleOne from '../recipeview/styleone'
 import RecipePrint from '../recipeprint/recipeprint'
 import MessagePopup from '@/components/messagepopup/messagepop'
+import MissingRecipe from '@/components/missingrecipe/missingrecipe'
 
 export default function RecipeParent(props: any) {
 
@@ -31,9 +32,18 @@ export default function RecipeParent(props: any) {
       ? <RecipePrint recipeData={props.recipeData} togglePrint={setTogglePrint} />
       :
       <main className={styles.MainContainer + ' ' + styles.HidePrint}>
-        <div className={styles.RecipeView}>
-            <RecipeStyleOne recipeData={props.recipeData} togglePrint={setTogglePrint} errorCallback={ErrorHandler} />
+        {/* Check if data is present */}
+        {props.recipeData.recipeName == null
+        ? 
+        <div className={styles.RecipeMissingView}>
+          <MissingRecipe type={'failURL'} />
         </div>
+        : 
+        <div className={styles.RecipeView}>
+          <RecipeStyleOne recipeData={props.recipeData} togglePrint={setTogglePrint} errorCallback={ErrorHandler} />
+        </div>
+        } 
+
       </main>
       }
     </>

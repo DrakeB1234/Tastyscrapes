@@ -18,6 +18,11 @@
     box-shadow: 0 0.1em 0.5em var(--grey-50);
     border-radius: 10px;
 }
+.RecipeMissingView {
+    width: clamp(100px, 100%, 1000px);
+    box-shadow: 0 0.1em 0.8em var(--grey-75);
+    border-radius: 10px;
+}
 
 @media print {
     .HidePrint {
@@ -37,6 +42,9 @@
         box-shadow: none;
         border-radius: 10px;
         overflow-y: scroll;
+    }
+    .RecipeMissingView {
+        box-shadow: none;
     }
     .SelectorContainer {
         margin-bottom: 1em;

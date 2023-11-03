@@ -7,8 +7,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
+import Navbar from '@/components/navbar/navbar'
 import RecipePrint from '../recipe/recipeprint/recipeprint'
 import MessagePopup from '@/components/messagepopup/messagepop'
+import MissingRecipe from '@/components/missingrecipe/missingrecipe'
 import { GetRecipesID } from '@/db/dbhelpers'
 
 export default function RecipeBox({
@@ -24,6 +26,7 @@ export default function RecipeBox({
   const [message, setMessage] = useState('');
   const [toggleMessage, setToggleMessage] = useState(false);
   const [togglePrint, setTogglePrint] = useState(false);
+  const [toggleDropdown, setToggleDropdown] = useState(false);
 
   const GetRecipeCardData = async () => {
     // if no recipe id is present, set id to -1 
@@ -58,6 +61,7 @@ export default function RecipeBox({
 
   return (
     <>
+      <Navbar searchBar={false} mobileLogo={false} />
       {toggleMessage
       ? <MessagePopup toggleMessage={setToggleMessage} messageType={messageType} message={message} />
       : <></>
@@ -66,28 +70,13 @@ export default function RecipeBox({
       ? <RecipePrint recipeData={recipeData} togglePrint={setTogglePrint} />
       :
       <main className={styles.MainContainer}>
+        {recipeData == undefined
+        ? 
+        <div className={styles.RecipeMissingView}>
+          <MissingRecipe type={'failRecipe'}/>
+        </div>
+        :
         <div className={styles.RecipeView}>
-          {/* Check if recipe data was found */}
-          {recipeData == undefined
-          ? 
-          <div className={rstyles.MainContainer}>
-              <div className={rstyles.SelectorContainer}>
-                  <Link href={'/'}
-                  className={rstyles.SelectButton}
-                  >
-                      <Image
-                      width={25}
-                      height={25}
-                      quality={100}
-                      alt='print'
-                      src='/graphics/icons/icon-arrow-outline.svg'
-                      />
-                  </Link>
-              </div>
-              
-              <h1>Nothing Found</h1>
-          </div>
-          :
           <div className={rstyles.MainContainer}>
               <div className={rstyles.SelectorContainer}>
                   <Link href={'/'}
@@ -125,7 +114,9 @@ export default function RecipeBox({
                       src='/graphics/icons/icon-share-outline.svg'
                       />
                   </button>
-                  <button className={rstyles.SelectButton}>
+                  <div 
+                  onClick={() => setToggleDropdown(true)}
+                  className={rstyles.SelectButton}>
                       <Image
                       width={25}
                       height={25}
@@ -133,10 +124,47 @@ export default function RecipeBox({
                       alt='print'
                       src='/graphics/icons/icon-info-outline.svg'
                       />
-                  </button>
-
+                      {toggleDropdown
+                      ?
+                      <div className={styles.DropDownMenu}>
+                        <button>
+                          <Image
+                          width={20}
+                          height={20}
+                          quality={100}
+                          alt='print'
+                          src='/graphics/icons/icon-pencil-outline.svg'
+                          />
+                          Edit
+                        </button>
+                        <button>
+                          <Image
+                          width={20}
+                          height={20}
+                          quality={100}
+                          alt='print'
+                          src='/graphics/icons/icon-trash-outline.svg'
+                          />
+                          Delete
+                        </button>
+                        <button
+                        onClick={() => setToggleDropdown(false)}
+                        >
+                          <Image
+                          width={20}
+                          height={20}
+                          quality={100}
+                          alt='print'
+                          src='/graphics/icons/icon-exit-outline.svg'
+                          />
+                          Close
+                        </button>                      
+                      </div>
+                      :
+                      <></>
+                      }
+                  </div>
               </div>
-
               <div className={rstyles.RecipeDataParent}>
                   <div className={rstyles.TitleContainer}>
                   <Image 
@@ -204,8 +232,8 @@ export default function RecipeBox({
                     </div>
               </div>
           </div>
-          }
         </div>
+        }
       </main>
       }
     </>

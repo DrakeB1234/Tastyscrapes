@@ -16,8 +16,6 @@ export default async function Recipe({
 
   const GetData = async (url: string) => {
     try {
-        // Cause Delay
-        // await new Promise(resolve => setTimeout(resolve, 3000));
         // Fetch data from URL and store the response into a const
         const res = await fetch(url)
         // Convert the response into text
@@ -26,7 +24,7 @@ export default async function Recipe({
         return FormatHTML_URL(body, new URL(url));
 
     } catch (err) {
-      console.log(err)
+      return undefined;
     }
   }
 

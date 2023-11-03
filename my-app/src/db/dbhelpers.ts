@@ -40,12 +40,18 @@ export const AddRecipe = async (recipeData: any) => {
     }
 }
 
-export const GetRecipes = async () => {
+export const GetRecipes = async (limit: number) => {
     try {
-
-        // Check for repeat URLs to avoid duplicate recipes
-        const res: any = await recipesTable
-        .toArray();
+        let res: any = {};
+        // Check if limit was provided
+        if (!limit) { 
+            res = await recipesTable
+            .toArray();
+        }
+        else {
+            res = await recipesTable
+            .limit(limit).toArray();
+        }
 
         return {
             status: 'success',

@@ -1,0 +1,39 @@
+.MainContainer {
+    position: fixed;
+    inset: 0 0 0 0;
+    display: grid;
+    place-items: start center;
+    padding: 4em;
+    background-color: rgb(0, 0, 0, 0.3);
+    z-index: 1;
+}
+.ParentContainer {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    padding: 1em;
+    background-color: white;
+}
+.TitleContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+    .TitleContainer > h1 {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--grey-100);
+    }
+    .TitleContainer > button {
+        display: flex;
+        justify-content: center;
+        padding: 0.8em;
+        border: 1px solid var(--grey-25);
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+    }
+        .TitleContainer > button:hover {
+            background-color: rgb(248, 147, 147);
+        }

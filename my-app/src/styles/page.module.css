@@ -67,6 +67,7 @@
     gap: 1em;
     justify-content: center;
     padding: 2em;
+    padding-top: 1em;
     background-color: var(--colorli-1);
 }
     .SliderMainContainer > h1 {
@@ -128,6 +129,34 @@
         font-size: 1.6rem;
         color: var(--grey-100);
     }
+.TitleContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em 0;
+    flex-wrap: wrap;
+}
+    /* buttons */
+    .TitleContainer > button {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1em;
+        padding: 0.5em 1em 0.5em 1em;
+        border-radius: 30px;
+        background: none;
+        border: 1px solid var(--grey-25);
+    }
+        .TitleContainer > button {
+            cursor: pointer;
+        }
+        .TitleContainer > button > h1 {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--grey-100);
+        }
+        .TitleContainer > button:hover {
+            background-color: var(--grey-50);
+        }
 .RecipeCardContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -142,6 +171,9 @@
         width: 100%;
         box-shadow: 0 0.1em 0.5em var(--grey-50);
         overflow: hidden;
+    }
+    .RecipeCard:hover {
+        background-color: var(--grey-25);
     }
         .RecipeCard > img {
             width: 100%;
@@ -173,7 +205,6 @@
 @media (max-width: 576px) {
     .RecipeMainContainer {
         padding: 0.5em;
-        padding-top: 1em;
     }
     .RecipeContainer {
         padding: 0.5em;
@@ -203,9 +234,6 @@
     }
     /* Recipe Cards */
     .RecipeCardContainer {
-        display: grid;
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1em;
-        padding-top: 2em;
     }
 }

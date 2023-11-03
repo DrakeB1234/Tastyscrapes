@@ -23,10 +23,10 @@ export default function RecipePrint(props: any) {
                 onClick={() => props.togglePrint(false)}
                 >
                     <Image
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                     quality={100}
-                    alt='print'
+                    alt='x'
                     src='/graphics/icons/icon-exit-outline.svg'
                     /> 
                 </button>
