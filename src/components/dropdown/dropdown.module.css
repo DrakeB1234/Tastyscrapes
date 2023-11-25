@@ -1,0 +1,47 @@
+.DropDownParent {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid var(--grey-25);
+  box-shadow: 0 0 0.4em var(--grey-50);
+  overflow: hidden;
+  animation: Open 0.3s;
+  z-index: 2;
+}
+  .DropDownParent > button, .DropDownParent > a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding:  1em 0.5em 1em 0.5em;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+    .DropDownParent > button:hover, .DropDownParent > a:hover {
+      background-color: var(--grey-25);
+      transition: all 0.3s;
+    }
+    .DropDownParent > :not(:first-child) {
+      border-top: 1px solid var(--grey-25);
+    }
+  .DropDownParent > button > h4, .DropDownParent > a > h4 {
+    font-weight: 300;
+  }
+  .DropDownParent > button[value='red']:hover, .DropDownParent > a[value='red']:hover {
+    background-color: var(--red-2);
+    transition: all 0.3s;
+  }
+  .DropDownParent > button[value='red'] > h4, .DropDownParent > a[value='red'] > h4 {
+    color: var(--red-1);
+  }
+
+@keyframes Open {
+  0% {width: 0;}
+  100% {width: 200px;}
+}

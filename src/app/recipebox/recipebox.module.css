@@ -1,0 +1,14 @@
+.RecipeBoxTitleContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding-bottom: 2em;
+}
+  .RecipeBoxTitleContainer > h3 {
+    font-weight: 500;
+  }
+  .RecipeBoxTitleContainer > a:last-child {
+    margin-left: auto;
+    font-weight: 500;
+  }

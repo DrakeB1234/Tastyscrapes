@@ -1,0 +1,38 @@
+.SearchBarParent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+  .SearchBarParent > input {
+    width: 100%;
+    padding: 0.7em;
+    padding-right: 3em;
+    font-size: 1rem;
+    color: var(--grey-100);
+    border-radius: 10px;
+    border: 2px solid var(--grey-25);
+    outline: none;
+    caret-color: red;
+
+  }
+    .SearchBarParent > input:focus {
+      border: 2px solid var(--grey-100);
+    }
+    .SearchBarParent > input::placeholder {
+      color: var(--grey-50);
+    }
+  .SearchBarParent > button {
+    position: absolute;
+    right: 0;
+    padding: 1em;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+    .SearchBarParent > button:hover {
+      background-color: var(--grey-25);
+    }

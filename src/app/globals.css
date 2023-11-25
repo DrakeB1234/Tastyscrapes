@@ -1,0 +1,198 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+
+:root {
+  --color-1: #5666f3;
+  --color-2: #ff9e6e;
+  --color-3: #eaebf1;
+
+  --grey-100: rgb(24, 24, 24);
+  --grey-75: rgb(112, 112, 112);
+  --grey-50: rgb(148, 148, 148);
+  --grey-25: rgb(230, 230, 230);
+  --grey-0: rgb(247, 247, 247);
+
+  --red-1: rgb(172, 66, 66);
+  --red-2: rgb(252, 190, 190);
+
+  --green-1: rgb(75, 172, 66);
+  --green-2: rgb(208, 255, 210);
+}
+
+/* Handle text */
+h1, h2, h3, h4, h5 {
+  color: var(--grey-100);
+}
+h1 {
+  font-size: 1.8rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
+h3 {
+  font-size: 1.2rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.8rem;
+}
+/* Main Container layout */
+main {
+  display: grid;
+  box-sizing: border-box;
+}
+/* for maximizing content size on different devices */
+.WidthAdjustParent {
+  place-self: center;
+  display: grid;
+  width: clamp(50px, 100%, 1200px);
+  padding: 2em;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+  /* Content, box shadow for styling */
+  .WidthAdjustContent {
+    display: grid;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0.05em 0.2em var(--grey-50);
+    overflow: hidden;
+  }
+
+/* buttons */
+button.ButtonParent, a.ButtonParent, div.ButtonParent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  background-color: inherit;
+  border-radius: 70px;
+  border: 1px solid var(--grey-25);
+  font-weight: 300;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+  button.ButtonParent:hover, a.ButtonParent:hover, div.ButtonParent:hover {
+    background-color: var(--grey-25);
+    transition: all 0.3s;
+  }
+  /* Red button */
+  button.RedButton:hover, a.RedButton:hover {
+    color: var(--red-1);
+    background-color: var(--red-2);
+    transition: background-color 0.3s;
+  }
+  /* Green button */
+  button.GreenButton:hover, a.GreenButton:hover {
+    color: var(--green-1);
+    background-color: var(--green-2);
+    border: 1px solid var(--green-2);
+    transition: background-color 0.3s;
+  }
+/* Inputs */
+.InputLabel {
+  padding: 1px;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: var(--grey-75);
+}
+.InputStyle {
+  width: 100%;
+  padding: 0.6em;
+  border-radius: 10px;
+  border: 1px solid var(--grey-25);
+  font-weight: 300;
+  font-size: 1rem;
+  color: var(--grey-100);
+  box-sizing: border-box;
+  outline: none;
+  caret-color: red;
+  resize: none;
+}
+  /* Target textareas */
+  textarea.InputStyle {
+    min-height: 80px;
+    font-family: Arial;
+    font-size: 0.9rem;
+  }
+  .InputStyle:focus {
+    border: 2px solid var(--grey-100);
+  }
+  .InputStyle::placeholder {
+    color: var(--grey-50);
+  }
+
+@media print {
+  .WidthAdjustParent {
+    padding: 1em;
+    padding-top: 0;
+  }
+  .WidthAdjustContent {
+    box-shadow: none;
+  }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+  .WidthAdjustParent {
+    padding: 0;
+  }
+  .WidthAdjustContent {
+    padding: 0.5em;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

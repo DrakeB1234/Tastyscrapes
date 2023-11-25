@@ -1,0 +1,103 @@
+.RecipeSelectContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  max-width: 500px;
+}
+  .RecipeSelectContainer > select {
+    min-height: 30px;
+    max-width: 100px;
+    background: none;
+    border-radius: 10px;
+    border: 1px solid var(--grey-25);
+    font-size: 0.9rem;
+    font-weight: 300;
+    cursor: pointer;
+    outline: none;
+  }
+    .RecipeSelectContainer > select:focus {
+      border: 1px solid var(--grey-50);
+    }
+  .RecipeInputContainer {
+    flex: 2 2 0;
+    display: flex;
+    position: relative;
+    gap: 0.5em;
+    min-width: 150px;
+  }
+    .RecipeInputContainer > input {
+      padding-right: 3em;
+    }
+    .RecipeInputContainer > button {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding-right: 1em;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+.SearchValuesContainer {
+  padding-top: 1em;
+}
+.CardContainer {
+  margin-top: 1em;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1em;
+}
+.CardParent {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: var(--grey-0);
+}
+  .CardParent > img {
+    align-self: center;
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+    .CardParent:hover > img {
+      filter: opacity(60%);
+      transition: all 0.2s ease-in-out;
+    }
+.CardText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  height: 100%;
+  padding: 0.5em;
+  padding-top: 0.5em;
+}
+  .CardText > h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 2px;
+  }
+  .CardText > h5 {
+    margin-top: auto;
+    color: var(--color-2);
+    overflow-wrap: break-word;
+    padding: 2px;
+  }
+.RecipeCollectionText {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+
+/* Phones */
+@media (max-width: 576px) {
+  .CardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}

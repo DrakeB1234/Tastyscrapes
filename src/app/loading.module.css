@@ -1,0 +1,132 @@
+.RecipeCardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1em;
+  background: linear-gradient(45deg,#ffffff, #fafafa, #f1f1f1);
+  background-size: 600% 100%;
+  animation: skeleton-loading-main 1s infinite linear alternate;
+  overflow: hidden;
+}
+  .RecipeCardsItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+    .RecipeCardsImage {
+      max-width: 250px;
+      aspect-ratio: 2/1;
+      object-fit: cover;
+      border-radius: 10px;
+      animation: skeleton-loading 0.8s infinite linear alternate;
+    }
+    .RecipeCardsText {
+      height: 1rem;
+      width: 80%;
+      animation: skeleton-loading 0.8s infinite linear alternate;
+    }
+    .RecipeCardsItem > .RecipeCardsText:last-child {
+      width: 60%;
+    }
+.RecipeCardContainer {
+  padding: 3em;
+  background: linear-gradient(45deg,#ffffff, #fafafa, #f1f1f1);
+  background-size: 600% 100%;
+  animation: skeleton-loading-main 1s infinite linear alternate;
+  overflow: hidden;
+}
+  .RecipeCardTitleContainer {
+    display: flex;
+    gap: 1em;
+    padding-top: 1em;
+    overflow: hidden;
+  }
+    .RecipeCardImage {
+      flex: 1 1 0;
+      max-width: 200px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 10px;
+      animation: skeleton-loading 0.8s infinite linear alternate;
+    }
+    .RecipeCardTextContainer {
+      flex: 2 1 0;
+      width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      max-width: 500px;
+      overflow: hidden;
+    }
+      .RecipeCardText {
+        height: 2rem;
+        width: 80%;
+        animation: skeleton-loading 0.8s infinite linear alternate;
+      }
+      .RecipeCardTextContainer > :not(:first-child) {
+        height: 1rem;
+        width: 60%;
+        animation: skeleton-loading 0.8s infinite linear alternate;
+      }
+  .RecipeCardNutrition {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em 3em;
+    padding: 1em 0.5em 1em 0.5em;
+    margin-top: 1em;
+    border-bottom: 1px solid var(--grey-25);
+  }
+    .RecipeCardNutritionItem {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+      .RecipeCardNutritionItem > .RecipeCardText {
+        height: 1rem;
+        width: 100%;
+      }
+      .RecipeCardNutritionItem > .RecipeCardText:not(:first-child) {
+        height: 2rem;
+      }
+  .RecipeCardDataContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em 1em;
+    padding-top: 2em;
+  }
+    .RecipeCardDataItem {
+      flex: 1 1 0;
+      height: 200px;
+      min-width: 250px;
+      background-color: red;
+      animation: skeleton-loading 0.8s infinite linear alternate;
+    }
+
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: rgb(196, 196, 196);
+    }
+    100% {
+        background-color: rgb(228, 228, 228);
+    }
+}
+
+@keyframes skeleton-loading-main {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}
+
+/* Phones */
+@media (max-width: 576px) {
+  .RecipeCardsContainer {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  .RecipeCardContainer {
+    padding: 1em;
+  }
+}

@@ -1,0 +1,157 @@
+.RecipeMain {
+  padding-top: 10px;
+}
+.RecipeParent {
+  padding: 3em;
+  padding-top: 1em;
+  overflow: hidden;
+}
+.RecipeButtonsParent {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0 0.2em var(--grey-50);
+}
+  .RecipeButtonsContainer {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: clamp(100px, 100%, 1200px);
+    padding: 0.8em 0.5em;
+    background-color: white;
+    box-sizing: border-box;
+  }
+    .RecipeButtonsContainer > h3 {
+      font-weight: 500;
+    }
+    .RecipeButtonsContainer > button {
+      margin-left: auto;
+    }
+    .SubmitButton {
+      background-color: var(--grey-100);
+    }
+.RecipeTitleContainer {
+  display: flex;
+  gap: 1em;
+  padding-top: 1em;
+  overflow: hidden;
+}
+  .RecipeTitleContainer > img {
+    flex: 1 1 0;
+    width: 0;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    max-width: 125px;
+    border-radius: 10px;
+  }
+  .RecipeTitleText {
+    flex: 2 1 0;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+.RecipeNutritionContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em 3em;
+  padding: 1em 0.5em 1em 0.5em;
+  margin-top: 1em;
+  border-bottom: 2px solid var(--grey-25);
+  overflow: hidden;
+}
+  .RecipeNutritionItem {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+    min-width: 100px;
+    max-width: 125px;
+    overflow: hidden;
+  }
+    .RecipeNutritionItem > input {
+      text-align: center;
+    }
+.RecipeDataParent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em 1em;
+  padding-top: 2em;
+  overflow: hidden;
+}
+  .RecipeDataParent > div {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    min-width: 250px;
+  }
+    .RecipeDataParent > div > h3 {
+      font-weight: 500;
+    }
+  .DataInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.2em;
+    overflow: hidden;
+  }
+    /* trash icon */
+    .DataInputContainer > button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: fit-content;
+      padding: 0.5em;
+      border: 0;
+      border-radius: 50%;
+      background: none;
+      cursor: pointer;
+    }
+      .DataInputContainer > button:hover {
+        background-color: rgb(248, 147, 147);
+      }
+.RecipeNoteContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2em;
+}
+  .RecipeNoteContainer > h3 {
+    font-weight: 500;
+    padding-bottom: 0.5em;
+  }
+  .RecipeNoteContainer > textarea {
+    height: 200px;
+  }
+.AddFieldButton {
+  align-self: center;
+  width: fit-content;
+  margin-top: 0.5em;
+}
+.InputError {
+  padding-top: 0.5em;
+  font-size: 0.8rem;
+  color: var(--red-1);
+}
+
+
+/* Phones */
+@media (max-width: 576px) {
+  .RecipeParent {
+    padding: 0.5em;
+    padding-bottom: 2em;
+    margin-top: 4em;
+  }
+  .RecipeTitleContainer > img {
+    max-width: 100px;
+  }
+}

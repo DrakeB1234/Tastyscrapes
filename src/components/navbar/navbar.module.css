@@ -1,0 +1,26 @@
+.NavbarParent {
+  padding: 1em;
+}
+.NavbarContent {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: clamp(100px, 100%, 1200px);
+  box-sizing: border-box;
+}
+  .NavbarContent > a > img {
+    height: auto;
+    width: 200px;
+  }
+
+@media print {
+  .NavbarContent {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .NavbarParent {
+    display: none;
+  }
+}

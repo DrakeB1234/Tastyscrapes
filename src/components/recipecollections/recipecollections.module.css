@@ -1,0 +1,60 @@
+.CardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1em 3em;
+  padding: 0.5em;
+  overflow: hidden;
+}
+.CardParent {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  padding-bottom: 0.5em;
+}
+.CardImageContainer {
+  position: relative;
+}
+  .CardImageContainer > h2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 30%;
+    padding: 0.5em;
+    background-color: var(--grey-75);
+    text-align: center;
+    font-weight: 500;
+    color: var(--grey-0);
+  }
+  .CardImageContainer > img {
+    height: auto;
+    max-width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 10px;
+    filter:opacity(40%);
+  }
+  .CardParent:hover {
+    background-color: var(--grey-0);
+  }
+    .CardImageContainer:hover > img {
+      filter: opacity(20%);
+      transition: all 0.2s ease-in-out;
+    }
+.CardText {
+  display: flex;
+  padding: 0.1em;
+  padding-top: 0.5em;
+}
+  .CardText > h2 {
+    padding: 2px;
+    overflow-wrap: break-word;
+    overflow: hidden;
+  }
+
+
+/* Phones */
+@media (max-width: 576px) {
+  .CardContainer {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
