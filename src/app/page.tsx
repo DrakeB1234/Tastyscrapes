@@ -5,10 +5,8 @@ import Link from 'next/link'
 import styles from './home.module.css'
 import RecipeCards from '@/components/recipecards'
 import SearchBar from '@/components/searchbar'
-import Loading from './recipebox/loading'
 
 export default async function Home() {
-
   return (
     <main>
       <div className={styles.HeaderParent}>

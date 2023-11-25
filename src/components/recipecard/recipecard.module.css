@@ -40,7 +40,7 @@
       font-weight: 500;
     }
     /* Recipe creator text */
-    .RecipeTitleText > h3 {
+    .RecipeTitleText > h4 {
       font-weight: 300;
     }
     /* Recipe url text */

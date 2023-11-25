@@ -78,7 +78,7 @@ export default function RecipeBox() {
                 <button
                 value={'red'}
                 onClick={() =>{
-                  setPopupInfo({ title: 'Delete All Reipes?', message: 'This action can not be reversed', confirmButtonText: 'Delete All', callback: DeleteAllRecipesFunction });
+                  setPopupInfo({ title: 'Delete All Recipes?', message: 'This action can not be reversed', confirmButtonText: 'Delete All', callback: DeleteAllRecipesFunction });
                   setPopup(true);
                 }}
                 >

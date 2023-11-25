@@ -18,7 +18,7 @@ export default function RecipeCards(props: Props) {
   const [data, setData] = useState<any>();
   const [searchData, setSearchData] = useState<any>();
   const [collections, setCollections] = useState<any>();
-  const [searchValues, setSearchValues] = useState<any>({collection: 'All Recipes', recipeName: ''});
+  const [searchValues, setSearchValues] = useState<any>();
 
   useEffect(() => {
     async function GetData() {
@@ -32,6 +32,7 @@ export default function RecipeCards(props: Props) {
       }
       setData(res.data);
       setSearchData(res.data);
+      setSearchValues({collection: 'All Recipes', recipeName: '', resultsAmount: res.data.length});
       res = await GetCollections();
       if (res.status == 'error') { throw new Error(res.data)}
       setCollections(res.data);
@@ -68,7 +69,7 @@ export default function RecipeCards(props: Props) {
     return a.recipeName.localeCompare(b.recipeName)
     });
     // Set state
-    setSearchValues({collection: selectData, recipeName: inputData})
+    setSearchValues({collection: selectData, recipeName: inputData, resultsAmount: recipeData.length})
     setSearchData(recipeData);
   }
 
@@ -102,8 +103,8 @@ export default function RecipeCards(props: Props) {
       ? 
       <div className={styles.SearchValuesContainer}>
         {searchValues.recipeName
-        ? <h4>{`Showing results for '${searchValues.recipeName}'  in ${searchValues.collection != 'none' ? searchValues.collection : 'Unorganized'}`}</h4>
-        : <h4>{`Showing all results in ${searchValues.collection != 'none' ? searchValues.collection : 'Unorganized'}`}</h4>
+        ? <h5>{`Showing results for '${searchValues.recipeName}'  in ${searchValues.collection != 'none' ? searchValues.collection : 'Unorganized'} (${searchValues.resultsAmount} results)`}</h5>
+        : <h5>{`Showing all results in ${searchValues.collection != 'none' ? searchValues.collection : 'Unorganized'} (${searchValues.resultsAmount} results)`}</h5>
         }
       </div>
       : ''

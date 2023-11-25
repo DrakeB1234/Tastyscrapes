@@ -169,7 +169,7 @@ export default function RecipeCard(props: Props) {
             />
             <div className={styles.RecipeTitleText}>
               <h2>{props.data.recipeName}</h2>
-              <h3>Creator: {props.data.recipeCreator}</h3>
+              <h4>Creator: {props.data.recipeCreator}</h4>
               <Link href={props.data.originURL ? props.data.originURL : '/'} target='_blank'>{props.data.originHostname}</Link>
             </div>
           </div>

@@ -16,6 +16,7 @@
   width: 100%;
   background-color: white;
   box-shadow: 0 0 0.2em var(--grey-50);
+  z-index: 2;
 }
   .RecipeButtonsContainer {
     display: flex;

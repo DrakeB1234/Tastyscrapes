@@ -1,3 +1,21 @@
+.MainLoadingParent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  padding: 4em;
+  padding-top: 10%;
+}
+  .MainLoadingParent > img:first-child {
+    height: auto;
+    max-width: 200px;
+    aspect-ratio: 1/1.3;
+  }
+  .MainLoadingParent > h1 {
+    font-size: 2.3rem;
+    font-weight: 600;
+  }
 .RecipeCardsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -128,5 +146,14 @@
   }
   .RecipeCardContainer {
     padding: 1em;
+  }
+  .MainLoadingParent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    padding: 4em;
+    padding-top: 20%;
   }
 }
