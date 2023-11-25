@@ -79,7 +79,7 @@ export default function RecipeCard(props: Props) {
             ?
             <>
               <button className='ButtonParent'
-              onClick={() => navigator.share({title: 'TastyScrapes', url:`tastyscrapes/recipescrape?url=${props.data.originURL}`})}
+              onClick={() => navigator.share({title: `TastyScrapes ${props.data.recipeName}`, url:`recipescrape?url=${props.data.originURL}`})}
               >
                 <Image 
                 width={20}

@@ -38,6 +38,7 @@
 /* Phones */
 @media (max-width: 576px) {
   .HeaderContent {
-    padding: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 }
