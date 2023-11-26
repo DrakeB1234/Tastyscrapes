@@ -166,20 +166,6 @@ export async function DeleteRecipe (id: number) {
   }
 }
 
-export async function ExportRecipes () {
-  try {
-
-      // const blob = await exportDB(db);
-
-      return {
-          status: 'success',
-          data: ''
-      };
-  } catch (error) {
-      throw new Error('There was an error processing your request. Please try again later');
-  }
-}
-
 export async function DeleteAllRecipes () {
   try {
 
@@ -189,6 +175,56 @@ export async function DeleteAllRecipes () {
           status: 'success',
           data: 'All data cleared'
       };
+  } catch (error) {
+      throw new Error('There was an error processing your request. Please try again later');
+  }
+}
+
+export async function ExportRecipes () {
+  try {
+
+      let res: any = [];
+
+      res = await db.table('recipes')
+      .reverse()
+      .toArray();
+
+      res = JSON.stringify(res);
+      res = new Blob([res], {type: 'application/json'});
+
+      return {
+          status: 'success',
+          data: res
+      };
+  } catch (error) {
+      throw new Error('There was an error processing your request. Please try again later');
+  }
+}
+
+async function parseJsonFile(file: any) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+    fileReader.onload = (event: any) => resolve(JSON.parse(event.target.result))
+    fileReader.onerror = error => reject(error)
+    fileReader.readAsText(file)
+  })
+}
+
+export async function ImportRecipes (file: any) {
+  try {
+    if (file.type != 'application/json') throw new Error('Invalid File type used');
+
+    const object: any = await parseJsonFile(file);
+
+    for(const e of object) {
+      let res = await AddRecipe(e);
+      if (res.status == 'error') throw new Error('There was an error processing your request. Please try again later');
+    };
+
+    return {
+        status: 'success',
+        data: 'Data has been added'
+    };
   } catch (error) {
       throw new Error('There was an error processing your request. Please try again later');
   }

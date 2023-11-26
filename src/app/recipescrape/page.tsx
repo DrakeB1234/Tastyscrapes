@@ -7,9 +7,12 @@ export default async function RecipeScrape(params: any) {
 
   const searchURL: any = params.searchParams.url;
   // Check if url param was provided
-  if (!searchURL) { throw new Error('Not a valid URL!') } 
-
-  const res: any = await FormatHTML_URL(new URL(searchURL));
+  let res: any = null;
+  try {
+    res = await FormatHTML_URL(new URL(searchURL));
+  } catch (error: any) {
+    throw new Error('Invalid URL Provided');
+  }
 
   return (
     <RecipeCard returnURL='/' savedRecipe={false} data={res} />

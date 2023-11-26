@@ -4,21 +4,38 @@ import React, { Suspense, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { DeleteAllRecipes } from '@/db/dbhelpers'
+import { ExportRecipes, DeleteAllRecipes, ImportRecipes } from '@/db/dbhelpers'
 import styles from './recipebox.module.css'
 import RecipeCards from '@/components/recipecards'
 import DropDown from '@/components/dropdown'
 import Popup from '@/components/popup'
+import Prompt from '@/components/prompt'
 
 export default function RecipeBox() {
 
   const [dropdown, setDropdown] = useState(false);
   const [popup, setPopup] = useState(false);
   const [popupInfo, setPopupInfo] = useState<any>({});
+  const [prompt, setPrompt] = useState(false);
 
-  async function ExportRecipesFunction (){
-    // const res = await ExportRecipes();
-    // console.log(res.data)
+  const curTime = new Date(Date.now());
+
+  async function ExportRecipesFunction () {
+    const res = await ExportRecipes();
+    // Make new link element to be able to download blob file
+    const exportDownload = document.createElement("a");
+    exportDownload.href = URL.createObjectURL(res.data);
+    exportDownload.setAttribute("download", `tastyscrapes-recipesexport--${curTime.getFullYear()}-${curTime.getMonth() + 1}-${curTime.getDate()}--${curTime.getHours()}-${curTime.getMinutes()}-${curTime.getSeconds()}.json`);
+    document.body.appendChild(exportDownload);
+    exportDownload.click();
+    document.body.removeChild(exportDownload);
+  }
+
+  async function ImportRecipesFunction (e: any) {
+    e.preventDefault();
+    const res = await ImportRecipes(e.target[0].files[0])
+    if (res.status == 'error') { throw new Error('There was an error processing your request. Please try again later'); }
+    location.reload();
   }
 
   async function DeleteAllRecipesFunction() {
@@ -30,6 +47,10 @@ export default function RecipeBox() {
   return (
     <main>
       <Popup open={popup} setOpen={setPopup} title={popupInfo.title} message={popupInfo.message} callback={popupInfo.callback} confimButtonText={popupInfo.confirmButtonText} />
+      <Prompt open={prompt} setOpen={setPrompt} callback={ImportRecipesFunction}>
+        <h2>Add Recipes File</h2>
+        <input type='file' className='InputStyle' accept='application/json' />
+      </Prompt>
       <div className='WidthAdjustParent'>
         <div className='WidthAdjustContent'>
           <div className={styles.RecipeBoxTitleContainer}>
@@ -65,6 +86,7 @@ export default function RecipeBox() {
                   <h4>Export Recipes</h4>
                 </button>
                 <button
+                onClick={() => setPrompt(true)}
                 >
                   <Image 
                   width={25}
