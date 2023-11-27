@@ -9,7 +9,6 @@ import styles from './recipecards.module.css'
 
 type Props = {
   cardLimit: number,
-  orderAlpha?: boolean,
   viewSearch?: boolean,
 }
 
@@ -24,12 +23,6 @@ export default function RecipeCards(props: Props) {
     async function GetData() {
       let res: any = await GetRecipes(props.cardLimit);
       if (res.status == 'error') { throw new Error(res.data)}
-      // Organize data by recipe name
-      if (props.orderAlpha) {
-        res.data.sort((a: any, b:any) => {
-        return a.recipeName.localeCompare(b.recipeName)
-        });
-      }
       setData(res.data);
       setSearchData(res.data);
       setSearchValues({collection: 'All Recipes', recipeName: '', resultsAmount: res.data.length});
@@ -65,9 +58,10 @@ export default function RecipeCards(props: Props) {
       }
     }
     // Organize data by recipe name
-    recipeData.sort((a: any, b:any) => {
-    return a.recipeName.localeCompare(b.recipeName)
-    });
+    // recipeData.sort((a: any, b:any) => {
+    //   return a.recipeName.localeCompare(b.recipeName)
+    // });
+
     // Set state
     setSearchValues({collection: selectData, recipeName: inputData, resultsAmount: recipeData.length})
     setSearchData(recipeData);
@@ -78,7 +72,7 @@ export default function RecipeCards(props: Props) {
       {props.viewSearch
       ?
       <form className={styles.RecipeSelectContainer} onSubmit={SearchRecipe}>
-        <select>
+        <select onChange={(e: any) => e.target.form.requestSubmit()}>
           <option defaultChecked value={'All Recipes'}>All Recipes</option>
           {collections && collections?.map((e: any, index: number) => (
             <option value={`${e.collectionName}`} key={`option-${index}`}>{`${e.collectionName != 'none' ? e.collectionName : 'Unorganized'} - ${e.count}`}</option>
@@ -86,7 +80,7 @@ export default function RecipeCards(props: Props) {
         </select>
         <div className={styles.RecipeInputContainer}>
           <input className='InputStyle' />
-          <button>
+          <button type='submit'>
             <Image 
             width={25}
             height={25}
@@ -117,7 +111,7 @@ export default function RecipeCards(props: Props) {
             height={500}
             quality={100}
             alt=''
-            src={e.recipeImg ? e.recipeImg : '/graphics/images/Missing-Image.png'}
+            src={e.recipeImgFile ? URL.createObjectURL(e.recipeImgFile) : (e.recipeImg ? e.recipeImg : '/graphics/images/Missing-Image.png')}
             />
             <div className={styles.CardText}>
               <h3>{e.recipeName}</h3>

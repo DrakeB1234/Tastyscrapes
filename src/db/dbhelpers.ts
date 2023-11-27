@@ -98,6 +98,7 @@ export async function AddRecipe (data: any) {
       res = await db.table('recipes').add({
           collection: data.collection ? data.collection : 'none',
           recipeImg: data.recipeImg,
+          recipeImgFile: data.recipeImgFile,
           recipeName: data.recipeName,
           recipeCreator: data.recipeCreator,
           originURL: data.originURL,
@@ -189,8 +190,19 @@ export async function ExportRecipes () {
       .reverse()
       .toArray();
 
-      res = JSON.stringify(res);
-      res = new Blob([res], {type: 'application/json'});
+      // Set each recipeimgfile to none due to not being able to export files
+      res.forEach((e: any) => {
+        if (e.recipeImgFile) e.recipeImgFile = '';
+      });
+
+      // check if there is atleast 1 recipe in array, if not send NULL
+      if (res.length < 1){
+        res = null;
+      }
+      else {
+        res = JSON.stringify(res);
+        res = new Blob([res], {type: 'application/json'});
+      }
 
       return {
           status: 'success',
@@ -213,7 +225,6 @@ async function parseJsonFile(file: any) {
 export async function ImportRecipes (file: any) {
   try {
     if (file.type != 'application/json') throw new Error('Invalid File type used');
-
     const object: any = await parseJsonFile(file);
 
     for(const e of object) {

@@ -23,6 +23,10 @@
   .PopupContent > h4 {
     font-weight: 300;
   }
+  .PopupContent > h5 {
+    text-align: center;
+    font-weight: 300;
+  }
 .FormParent {
   display: flex;
   flex-direction: column;

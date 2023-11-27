@@ -8,9 +8,11 @@ import Link from 'next/link'
 
 import { GetRecipesID, EditRecipe } from '@/db/dbhelpers'
 import styles from './recipeboxedit.module.css'
+import Prompt from '@/components/prompt'
 
 type Inputs = {
   id: string | undefined,
+  recipeImg: any,
   recipeName: string | undefined,
   prepTime: string | undefined,
   cookTime: string | undefined,
@@ -26,6 +28,7 @@ export default function RecipeBoxEdit(params: any) {
   const router = useRouter();
 
   const [data, setData] = useState<any>({});
+  const [prompt, setPrompt] = useState(false);
 
   useEffect(() =>{
     async function GetData() {
@@ -102,6 +105,7 @@ export default function RecipeBoxEdit(params: any) {
     const res = EditRecipe({
       collection: data.collection,
       recipeImg: data.recipeImg,
+      recipeImgFile: data.recipeImgFile,
       recipeCreator: data.recipeCreator,
       originURL: data.originURL,
       originHostname: data.originHostname,
@@ -123,8 +127,26 @@ export default function RecipeBoxEdit(params: any) {
     if (e.target.id !== 'NotesInput' && e.key === 'Enter') e.preventDefault();
   };
 
+  const AddImage = (e: any) => {
+    e.preventDefault();
+    const file = (e.target[0].files[0]);
+    // Add image into data if file is selected and is JPG, JPEG, or PNG
+    if (file && (file.type == 'image/png' || file.type == 'image/jpeg' || file.type == 'image/jpg')) {
+      setData((prev: any) => ({...prev, recipeImgFile: file }));
+    };  
+    setPrompt(false);
+  };
+
+  const RemoveImage = () => {
+    return setData((prev: any) => ({...prev, recipeImgFile: undefined }));
+  }
+
   return (
     <main>
+      <Prompt open={prompt} setOpen={setPrompt} callback={AddImage}>
+        <h2>Add Image</h2>
+        <input type='file' className='InputStyle' accept='image/jpeg, image/png' />
+      </Prompt>
       <div className={styles.RecipeMain + ' WidthAdjustParent'}>
         <form className={styles.RecipeParent + ' WidthAdjustContent'}
         onSubmit={handleSubmit(onSubmit)} onKeyDown={(e: any) => checkKeyDown(e)}
@@ -151,13 +173,36 @@ export default function RecipeBoxEdit(params: any) {
           </div>
 
           <div className={styles.RecipeTitleContainer}>
-            <Image 
-            width={200}
-            height={200}
-            quality={100}
-            alt=''
-            src={data.recipeImg ? data.recipeImg : '/graphics/icons/icon-checkmark-outline.svg'}
-            />
+            <div className={styles.RecipeImageContainer}>
+              <Image 
+              width={200}
+              height={200}
+              quality={100}
+              alt=''
+              src={data.recipeImgFile ? URL.createObjectURL(data.recipeImgFile) : (data.recipeImg ? data.recipeImg : '/graphics/images/Missing-Image.png')}
+              onClick={() => setPrompt(true)}
+              />
+              {!data.recipeImgFile
+              ?
+              <Image 
+              width={20}
+              height={20}
+              quality={100}
+              alt='->'
+              src={'/graphics/icons/icon-plus-outline.svg'}
+              onClick={() => setPrompt(true)}
+              />
+              :
+              <Image 
+              width={20}
+              height={20}
+              quality={100}
+              alt='->'
+              src={'/graphics/icons/icon-exit-outline.svg'}
+              onClick={() => RemoveImage()}
+              />
+              }
+            </div>
 
             <div className={styles.RecipeTitleText}>
               <label htmlFor='recipeName' className='InputLabel'>Recipe Name</label>

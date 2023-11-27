@@ -11,18 +11,22 @@ export default function Error(error: any) {
   console.error(error.error);
 
   return (
-    <div className={styles.ErrorParent}>
-      <h1>Uh Oh!</h1>
-      <Image 
-      width={500}
-      height={500}
-      quality={100}
-      alt='->'
-      src={'/graphics/images/tastyscrapes-error.png'}
-      />
-      <h3>{error.error.message}</h3>
-      <h3>Please try again later</h3>
-      <Link href={'/'} className='ButtonParent'><h3>Go Back</h3></Link>
-    </div>
+    <main>
+      <div className='WidthAdjustParent'>
+        <div className={styles.ErrorParent}>
+          <h1>Uh Oh!</h1>
+          <Image 
+          width={500}
+          height={500}
+          quality={100}
+          alt='->'
+          src={'/graphics/images/tastyscrapes-error.png'}
+          />
+          <h4>{error.error.message}</h4>
+          <h4>Please try again later</h4>
+          <Link href={'/'} className='ButtonParent'><h3>Go Back</h3></Link>
+        </div>
+      </div>
+    </main>
   )
 }

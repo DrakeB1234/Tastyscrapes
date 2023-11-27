@@ -4,7 +4,7 @@ import React, { Suspense, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ExportRecipes, DeleteAllRecipes, ImportRecipes } from '@/db/dbhelpers'
+import { ExportRecipes, DeleteAllRecipes, ImportRecipes, AddRecipe} from '@/db/dbhelpers'
 import styles from './recipebox.module.css'
 import RecipeCards from '@/components/recipecards'
 import DropDown from '@/components/dropdown'
@@ -17,12 +17,26 @@ export default function RecipeBox() {
   const [popup, setPopup] = useState(false);
   const [popupInfo, setPopupInfo] = useState<any>({});
   const [prompt, setPrompt] = useState(false);
+  const [addRecipePrompt, setAddRecipePrompt] = useState(false);
 
   const curTime = new Date(Date.now());
 
+  async function AddBlankRecipeFunction (e: any) {
+    e.preventDefault();
+    const input = e.target[0].value;
+    // Check if input has been provided
+    if (!input) {
+      setAddRecipePrompt(false);
+      return;
+    }
+    const res = AddRecipe({recipeName: input});
+    location.reload();
+  }
+
   async function ExportRecipesFunction () {
     const res = await ExportRecipes();
-    // Make new link element to be able to download blob file
+    // Make new link element to be able to download blob file, IF res data is not null
+    if (res.data == null) return;
     const exportDownload = document.createElement("a");
     exportDownload.href = URL.createObjectURL(res.data);
     exportDownload.setAttribute("download", `tastyscrapes-recipesexport--${curTime.getFullYear()}-${curTime.getMonth() + 1}-${curTime.getDate()}--${curTime.getHours()}-${curTime.getMinutes()}-${curTime.getSeconds()}.json`);
@@ -51,6 +65,10 @@ export default function RecipeBox() {
         <h2>Add Recipes File</h2>
         <input type='file' className='InputStyle' accept='application/json' />
       </Prompt>
+      <Prompt open={addRecipePrompt} setOpen={setAddRecipePrompt} callback={AddBlankRecipeFunction}>
+        <h2>Add Blank Recipe</h2>
+        <input type='text' className='InputStyle' placeholder='Recipe Name' />
+      </Prompt>
       <div className='WidthAdjustParent'>
         <div className='WidthAdjustContent'>
           <div className={styles.RecipeBoxTitleContainer}>
@@ -73,6 +91,18 @@ export default function RecipeBox() {
               src={'/graphics/icons/icon-settings-outline.svg'}
               />
               <DropDown open={dropdown} setOpen={setDropdown}>
+                <button
+                onClick={() => setAddRecipePrompt(true)}
+                >
+                  <Image 
+                  width={25}
+                  height={25}
+                  quality={100}
+                  alt=''
+                  src={'/graphics/icons/icon-plus-outline.svg'}
+                  />
+                  <h4>Add Blank Recipe</h4>
+                </button>
                 <button
                 onClick={() => ExportRecipesFunction()}
                 >
@@ -117,7 +147,7 @@ export default function RecipeBox() {
             </Link>
           </div>
 
-          <RecipeCards cardLimit={1000} orderAlpha={true} viewSearch={true}/>
+          <RecipeCards cardLimit={1000} viewSearch={true}/>
       
         </div>
       </div>

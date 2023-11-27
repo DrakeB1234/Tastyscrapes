@@ -165,11 +165,11 @@ export default function RecipeCard(props: Props) {
             height={200}
             quality={100}
             alt=''
-            src={props.data.recipeImg != '' ? props.data.recipeImg : '/graphics/images/Missing-Image.png'}
+            src={props.data.recipeImgFile ? URL.createObjectURL(props.data.recipeImgFile) : (props.data.recipeImg ? props.data.recipeImg : '/graphics/images/Missing-Image.png')}
             />
             <div className={styles.RecipeTitleText}>
               <h2>{props.data.recipeName}</h2>
-              <h4>Creator: {props.data.recipeCreator}</h4>
+              <h4>Creator: {props.data.recipeCreator ? props.data.recipeCreator : 'Me!'}</h4>
               <Link href={props.data.originURL ? props.data.originURL : '/'} target='_blank'>{props.data.originHostname}</Link>
             </div>
           </div>
