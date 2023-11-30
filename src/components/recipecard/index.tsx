@@ -81,7 +81,13 @@ export default function RecipeCard(props: Props) {
               />
             </Link>
             <button className='ButtonParent'
-            onClick={() => window.print()}
+            onClick={() => {
+              // Changes document title temporarily to change default filename of PDF
+              const origTitle = document.title;
+              document.title = `TastyScrapes-${props.data.recipeName}`;
+              window.print();
+              document.title=origTitle;
+            }}
             >
               <Image 
               width={20}
