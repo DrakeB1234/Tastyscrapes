@@ -126,6 +126,11 @@
   .RecipeNotesParent > h4 {
     font-weight: 300;
   }
+  .RecipeNotesParent > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
 
 @media print {
   .RecipeTitleContainer > img {

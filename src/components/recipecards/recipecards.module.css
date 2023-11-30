@@ -20,8 +20,9 @@
     }
   .RecipeInputContainer {
     flex: 2 2 0;
-    display: flex;
     position: relative;
+    display: flex;
+    align-items: center;
     gap: 0.5em;
     min-width: 150px;
   }
@@ -33,7 +34,9 @@
       top: 0;
       bottom: 0;
       right: 0;
-      padding-right: 1em;
+      display: flex;
+      align-items: center;
+      padding-right: 0.7em;
       background: none;
       border: 0;
       cursor: pointer;

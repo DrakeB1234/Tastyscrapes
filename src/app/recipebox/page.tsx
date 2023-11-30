@@ -81,7 +81,7 @@ export default function RecipeBox() {
               src={'/graphics/icons/icon-leftarrow-outline.svg'}
               />
             </Link>
-            <h3>Recipes</h3>
+            <h3>Recipe Box</h3>
             <Link href={''} className='ButtonParent' onClick={() => setDropdown(!dropdown)}>
               <Image 
               width={20}

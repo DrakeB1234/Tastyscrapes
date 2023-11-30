@@ -213,6 +213,36 @@ export async function ExportRecipes () {
   }
 }
 
+export async function ExportRecipe (id: number) {
+  try {
+
+      let res: any = [];
+
+      res = await db.table('recipes')
+      .get(id);
+
+      // Set recipeimgfile to none due to not being able to export files
+      if (res.recipeImgFile) res.recipeImgFile = '';
+
+      // check if there is atleast 1 recipe in array, if not send NULL
+      if (res.length < 1){
+        res = null;
+      }
+
+      else {
+        res = JSON.stringify(res);
+        res = new Blob([res], {type: 'application/json'});
+      }
+
+      return {
+          status: 'success',
+          data: res
+      };
+  } catch (error) {
+      throw new Error('There was an error processing your request. Please try again later');
+  }
+}
+
 async function parseJsonFile(file: any) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader()
@@ -227,10 +257,17 @@ export async function ImportRecipes (file: any) {
     if (file.type != 'application/json') throw new Error('Invalid File type used');
     const object: any = await parseJsonFile(file);
 
-    for(const e of object) {
-      let res = await AddRecipe(e);
+    // Check if file is iteratable, single recipe exports will break this function
+    if (object.length > 0){
+      for(const e of object) {
+        let res = await AddRecipe(e);
+        if (res.status == 'error') throw new Error('There was an error processing your request. Please try again later');
+      };
+    }
+    else {
+      let res = await AddRecipe(object);
       if (res.status == 'error') throw new Error('There was an error processing your request. Please try again later');
-    };
+    }
 
     return {
         status: 'success',

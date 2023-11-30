@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import Linkify from 'react-linkify'
 
-import { AddRecipe, DeleteRecipe, AddCollection } from '@/db/dbhelpers'
+import { AddRecipe, DeleteRecipe, AddCollection, ExportRecipe } from '@/db/dbhelpers'
 import styles from './recipecard.module.css'
 import DropDown from '../dropdown'
 import Popup from '../popup'
@@ -25,21 +26,36 @@ export default function RecipeCard(props: Props) {
   const [popupInfo, setPopupInfo] = useState<any>({});
   const [prompt, setPrompt] = useState(false);
 
+  const curTime = new Date(Date.now());
+
   async function AddRecipeFunction() {
     const res: any = await AddRecipe(props.data);
     if (res.status == 'error') { throw new Error('There was an error processing your request. Please try again later'); }
     router.replace('/');
   }
 
-  async function DeleteRecipeFunction() {
-    const res: any = await DeleteRecipe(props.data.id);
+  async function AddCollectionFunction(e: any) {
+    e.preventDefault();
+    const res = await AddCollection(props.data.id, e.target[0].value);
     if (res.status == 'error') { throw new Error('There was an error processing your request. Please try again later'); }
     router.replace('/recipebox');
   }
 
-  async function AddCollectionFunction(e: any) {
-    e.preventDefault();
-    const res = await AddCollection(props.data.id, e.target[0].value);
+  async function ExportRecipeFunction() {
+    const res = await ExportRecipe(props.data.id);
+    if (res.status == 'error') { throw new Error('There was an error processing your request. Please try again later'); }
+    // Make new link element to be able to download blob file, IF res data is not null
+    if (res.data == null) return;
+    const exportDownload = document.createElement("a");
+    exportDownload.href = URL.createObjectURL(res.data);
+    exportDownload.setAttribute("download", `tastyscrapes-${props.data.recipeName}--${curTime.getFullYear()}-${curTime.getMonth() + 1}-${curTime.getDate()}--${curTime.getHours()}-${curTime.getMinutes()}-${curTime.getSeconds()}.json`);
+    document.body.appendChild(exportDownload);
+    exportDownload.click();
+    document.body.removeChild(exportDownload);
+  }
+
+  async function DeleteRecipeFunction() {
+    const res: any = await DeleteRecipe(props.data.id);
     if (res.status == 'error') { throw new Error('There was an error processing your request. Please try again later'); }
     router.replace('/recipebox');
   }
@@ -139,6 +155,18 @@ export default function RecipeCard(props: Props) {
                   <h4>Add to Collection</h4>
                 </button>
                 <button
+                onClick={() => ExportRecipeFunction()}
+                >
+                  <Image 
+                  width={25}
+                  height={25}
+                  quality={100}
+                  alt=''
+                  src={'/graphics/icons/icon-download-outline.svg'}
+                  />
+                  <h4>Export Recipe</h4>
+                </button>
+                <button
                 value={'red'}
                 onClick={() =>{
                   setPopupInfo({ title: 'Confirm Deletion?', message: 'This action can not be reversed', confirmButtonText: 'Delete', callback: DeleteRecipeFunction });
@@ -217,7 +245,7 @@ export default function RecipeCard(props: Props) {
               <h3>Notes</h3>
               <div>
                 {props.data.notesData.split('\n').map((e: any, index: number) => (
-                  <h4 key={`none-${index}`}>{e}</h4>
+                  <h4 key={`note-${index}`}><Linkify>{e}</Linkify></h4>
                 ))}
               </div>
           </div>

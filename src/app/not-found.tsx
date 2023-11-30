@@ -6,9 +6,7 @@ import Image from 'next/image';
 
 import styles from '@/app/error.module.css'
 
-export default function Error(error: any) {
-
-  console.error(error.error);
+export default function NotFound() {
 
   return (
     <main>
@@ -22,8 +20,7 @@ export default function Error(error: any) {
           alt='->'
           src={'/graphics/images/tastyscrapes-error.png'}
           />
-          <h4>{error.error.message.includes('Server') ? 'There has been an error!' : error.error.message}</h4>
-          <h4>Please try again later</h4>
+          <h4>{'Page Not Found!'}</h4>
           <Link href={'/'} className='ButtonParent'><h3>Go Back</h3></Link>
         </div>
       </div>
